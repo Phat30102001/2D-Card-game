@@ -19,19 +19,23 @@ public class BattleSystem : MonoBehaviour
     public Transform enemyBattleStation;
 
     public BattleHUD playerHUD;
-    public BattleHUD enemyHUD;*/
+    public BattleHUD enemyHUD;
 
     Unit playerUnit;
-    Unit enemyUnit;
+    Unit enemyUnit;*/
 
     public StageGenerate stageGenerate;
     public EnemyCtrl enemyCtrl;
+    public TurnNotify turnNotify;
 
 
     // Singleton
     private void Awake()
     {
-        
+        stageGenerate = GameObject.Find("Stage").GetComponent<StageGenerate>();
+        enemyCtrl= GameObject.Find("EnemyCtrl").GetComponent<EnemyCtrl>();
+        turnNotify= GetComponent<TurnNotify>();
+
         instance = this;
     }
     private void Start()
@@ -51,9 +55,11 @@ public class BattleSystem : MonoBehaviour
                 stageGenerate.HandleStageGen(); 
                 break;
             case BattleState.PLAYERTURN:
+                turnNotify.HandleTurnNotify();
                 Debug.Log("Choose your card");
                 break;
             case BattleState.ENEMYTURN:
+                turnNotify.HandleTurnNotify();
                 enemyCtrl.HandleEnemyTurn();
                 break;
             case BattleState.NEXTSTAGE:
