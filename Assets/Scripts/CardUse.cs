@@ -33,7 +33,7 @@ public class CardUse : MonoBehaviour,IPointerDownHandler
 
         PlayerAttack();
 
-        Destroy(cardUI);
+        //Destroy(cardUI);
     }
     
     private void PlayerAttack()

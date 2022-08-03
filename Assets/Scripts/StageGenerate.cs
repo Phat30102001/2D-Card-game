@@ -29,7 +29,7 @@ public class StageGenerate : MonoBehaviour
 
 
         playerPrefab = Resources.Load<GameObject>("Prefabs/Player");
-        int enemyNum=random.Next(1,2);
+        int enemyNum=random.Next(1,3);
         string enemyPath="Prefabs/Enemy"+enemyNum;
         enemyPrefab = Resources.Load<GameObject>(enemyPath);
 

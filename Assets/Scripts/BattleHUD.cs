@@ -23,6 +23,8 @@ public class BattleHUD : MonoBehaviour
 
     public void SetHP(int hp)
     {
+        if (hp <= 0) hp = 0;
+
         healthTextConvert = hp.ToString() + "/" + healthBar.maxValue.ToString();
         healthTextBar.text = healthTextConvert;
 
