@@ -5,13 +5,14 @@ using TMPro;
 using UnityEngine.UI;
 public class TurnNotify : MonoBehaviour
 {
-    public TextMeshProUGUI turnName;
+    private TextMeshProUGUI turnName;
 
     // turn is a game object to show the turn in the game
-    public GameObject turn;
+    private GameObject turn;
 
     private void Awake()
     {
+        turnName = GameObject.Find("Turn").GetComponent<TextMeshProUGUI>();
         turn = GameObject.Find("Turn");
     }
     private void Start()

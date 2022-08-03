@@ -7,14 +7,14 @@ using UnityEngine;
 
 public class EnemySkill : MonoBehaviour
 {
-    public Unit unit;
-
-    [SerializeField] private EnemyCtrl enemyCtrl;
-    [SerializeField] private PlayerCtrl playerCtrl;
 
 
-    [SerializeField] private BattleHUD enemyHUD;
-    [SerializeField] private BattleHUD playerHUD;
+    private EnemyCtrl enemyCtrl;
+    private PlayerCtrl playerCtrl;
+
+
+    private BattleHUD enemyHUD;
+    private BattleHUD playerHUD;
 
 
     private void Awake()

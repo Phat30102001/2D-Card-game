@@ -627,9 +627,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
-  stageGenerate: {fileID: 0}
-  enemyCtrl: {fileID: 0}
-  turnNotify: {fileID: 0}
 --- !u!4 &596011844
 Transform:
   m_ObjectHideFlags: 0
@@ -657,8 +654,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbe05f30952a35546b52ba84b9de59cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turnName: {fileID: 1711086749}
-  turn: {fileID: 0}
 --- !u!1 &781829149
 GameObject:
   m_ObjectHideFlags: 0
@@ -1611,9 +1606,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f9d88b4ee83a2444b85bed777d9c826, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unit: {fileID: 189058770426405538, guid: af4c48da7b4bf2343b9ac8991f8ba8a5, type: 3}
-  enemyCtrl: {fileID: 0}
-  enemyHUD: {fileID: 0}
+  unit: {fileID: 0}
 --- !u!1 &1442030034
 GameObject:
   m_ObjectHideFlags: 0
@@ -1698,11 +1691,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b9c61af0f0a1c74fbc82ac47bc1216e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unit: {fileID: -766204706757368506, guid: 2000faa441d3e4948abbfbea661bb021, type: 3}
-  enemyCtrl: {fileID: 0}
-  playerCtrl: {fileID: 0}
-  enemyHUD: {fileID: 0}
-  playerHUD: {fileID: 0}
 --- !u!1 &1711086747
 GameObject:
   m_ObjectHideFlags: 0
@@ -2340,7 +2328,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -203, y: -142}
+  m_AnchoredPosition: {x: 0, y: -140}
   m_SizeDelta: {x: 100, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1963642727

@@ -24,9 +24,9 @@ public class BattleSystem : MonoBehaviour
     Unit playerUnit;
     Unit enemyUnit;*/
 
-    public StageGenerate stageGenerate;
-    public EnemyCtrl enemyCtrl;
-    public TurnNotify turnNotify;
+    private StageGenerate stageGenerate;
+    private EnemyCtrl enemyCtrl;
+    private TurnNotify turnNotify;
 
 
     // Singleton

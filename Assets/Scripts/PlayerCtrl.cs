@@ -6,14 +6,17 @@ public class PlayerCtrl : MonoBehaviour
 {
     public Unit unit;
 
-    [SerializeField] private EnemyCtrl enemyCtrl;
+    private EnemyCtrl enemyCtrl;
     
-    [SerializeField] private BattleHUD enemyHUD;
+    private BattleHUD enemyHUD;
 
 
     // Start is called before the first frame update
     void Awake()
     {
+        unit = Resources.Load<Unit>("Prefabs/Player");
+
+
         //unit.Damage = 3;
         unit.MaxHp = 10;
         unit.CurrentHp = unit.MaxHp;
