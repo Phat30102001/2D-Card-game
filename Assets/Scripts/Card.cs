@@ -4,10 +4,14 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "New card", menuName = "Cards")]
 public class Card : ScriptableObject
-{
+{   
+    
     public string cardName;
-    public string cardDescription;
     public Sprite cardImage;
-    public int attackPoint;
-    public int healPoint;
+    [SerializeField] private int attackPoint;
+    [SerializeField] private int healPoint;
+
+    public int AttackPoint { get; set; }
+    public int HealPoint { get; set; }
+    
 }

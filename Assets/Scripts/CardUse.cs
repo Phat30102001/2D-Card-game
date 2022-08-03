@@ -1,45 +1,45 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class PlayerCtrl : MonoBehaviour
+
+[RequireComponent(typeof(BoxCollider2D))]
+public class CardUse : MonoBehaviour,IPointerDownHandler
 {
-    public Unit unit;
+    public Card card;
 
-    [SerializeField] private EnemyCtrl enemyCtrl;
-    
-    [SerializeField] private BattleHUD enemyHUD;
+    private EnemyCtrl enemyCtrl;
+
+    private BattleHUD enemyHUD;
 
 
-    // Start is called before the first frame update
-    void Awake()
+    private GameObject cardUI;
+    private void Awake()
     {
-        //unit.Damage = 3;
-        unit.MaxHp = 10;
-        unit.CurrentHp = unit.MaxHp;
-        unit.Element = "none";
-
+        cardUI = GameObject.Find("Card");
 
         enemyCtrl = GameObject.Find("EnemyCtrl").GetComponent<EnemyCtrl>();
 
         enemyHUD = GameObject.Find("EnemyHealthBar").GetComponent<BattleHUD>();
-
     }
-    /*public void OnAttackButton()
+    
+    public void OnPointerDown(PointerEventData eventData)
     {
+        //card can only be used in player turn
         if (BattleSystem.instance.state != BattleState.PLAYERTURN) return;
 
         PlayerAttack();
-        
-    }*/
-    /*private void PlayerAttack()
+
+        Destroy(cardUI);
+    }
+    
+    private void PlayerAttack()
     {   
         Debug.Log("you choose attack");
-        bool hpCheck = enemyCtrl.unit.TakeDamage(unit.Damage);
+        bool hpCheck = enemyCtrl.unit.TakeDamage(card.AttackPoint);
 
         enemyHUD.SetHP(enemyCtrl.unit.CurrentHp);
-
-        
 
         if (hpCheck)
         {
@@ -52,6 +52,5 @@ public class PlayerCtrl : MonoBehaviour
         }
         
 
-    }*/
-
+    }
 }

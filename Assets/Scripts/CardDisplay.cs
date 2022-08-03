@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class CardDisplay : MonoBehaviour
 {
     public Card card;
-    
+
     public TextMeshProUGUI cardName;
     public TextMeshProUGUI cardDescripttion;
     public Image cardImage;
@@ -15,7 +15,17 @@ public class CardDisplay : MonoBehaviour
     void Start()
     {
         cardName.text = card.cardName;
-        cardDescripttion.text = card.cardDescription;
+
+        // check card type
+        if (card.cardName != "Heal")
+        {
+            cardDescripttion.text = "Deal " +card.AttackPoint+ " "+card.cardName+ " damage";
+        }
+        else if (card.cardName == "Heal")
+        {
+            cardDescripttion.text = "Restore "+card.HealPoint+" health point";
+        }
+        
         cardImage.sprite = card.cardImage;
     }
 

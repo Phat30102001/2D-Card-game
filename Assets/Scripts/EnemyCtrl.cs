@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class EnemyCtrl : MonoBehaviour
 {
-    public EnemySkill enemySkill;
+    [SerializeField] private EnemySkill enemySkill;
     public Unit unit;
     void Awake()
     {
+        enemySkill = GameObject.Find("EnemyPrefab").GetComponent<EnemySkill>();
+        
+
+
         unit.Damage = 3;
         unit.MaxHp = 9;
         unit.CurrentHp = unit.MaxHp;
