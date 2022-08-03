@@ -70,7 +70,7 @@ public class EnemySkill : MonoBehaviour
 
         System.Random random = new System.Random();
 
-        int dmg = random.Next(enemyCtrl.unit.Damage-2, enemyCtrl.unit.Damage+2);
+        int dmg = random.Next(enemyCtrl.unit.Damage-1, enemyCtrl.unit.Damage+2);
 
         bool hpCheck= playerCtrl.unit.TakeDamage(dmg);
 

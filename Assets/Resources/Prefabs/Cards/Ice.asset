@@ -12,8 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea595957182dca24d95a8156b08192c2, type: 3}
   m_Name: Ice
   m_EditorClassIdentifier: 
-  cardName: Ice
-  cardDescription: Deal ice damage
+  cardName: ice
   cardImage: {fileID: 21300000, guid: 5de94ff108ae1e3429cca8f5e73a84ac, type: 3}
-  attackPoint: 3
-  healPoint: 0

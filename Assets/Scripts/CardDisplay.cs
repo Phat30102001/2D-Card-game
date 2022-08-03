@@ -6,11 +6,21 @@ using UnityEngine.UI;
 
 public class CardDisplay : MonoBehaviour
 {
-    public Card card;
+    private Card card;
 
-    public TextMeshProUGUI cardName;
-    public TextMeshProUGUI cardDescripttion;
-    public Image cardImage;
+    private TextMeshProUGUI cardName;
+    private TextMeshProUGUI cardDescripttion;
+    private Image cardImage;
+
+    private void Awake()
+    {
+        cardName = GameObject.Find("CardName").GetComponent<TextMeshProUGUI>();
+        cardDescripttion = GameObject.Find("CardDescription").GetComponent<TextMeshProUGUI>();
+        cardImage = GameObject.Find("CardImage").GetComponent<Image>();
+
+        card = Resources.Load<Card>("Prefabs/Cards/Fire");
+    }
+
     // Start is called before the first frame update
     void Start()
     {

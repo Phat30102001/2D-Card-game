@@ -9,11 +9,12 @@ public class EnemyCtrl : MonoBehaviour
     void Awake()
     {
         enemySkill = GameObject.Find("EnemyPrefab").GetComponent<EnemySkill>();
-        
+
+        System.Random random = new System.Random();
 
 
-        unit.Damage = 3;
-        unit.MaxHp = 9;
+        unit.Damage = random.Next(2,4);
+        unit.MaxHp = random.Next(4, 15);
         unit.CurrentHp = unit.MaxHp;
         unit.Element = "ice";
     }

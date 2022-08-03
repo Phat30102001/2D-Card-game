@@ -25,8 +25,13 @@ public class StageGenerate : MonoBehaviour
 
     private void Awake()
     {
+        System.Random random = new System.Random();
+
+
         playerPrefab = Resources.Load<GameObject>("Prefabs/Player");
-        enemyPrefab = Resources.Load<GameObject>("Prefabs/Enemy1");
+        int enemyNum=random.Next(1,2);
+        string enemyPath="Prefabs/Enemy"+enemyNum;
+        enemyPrefab = Resources.Load<GameObject>(enemyPath);
 
         
 
@@ -35,7 +40,7 @@ public class StageGenerate : MonoBehaviour
         enemyBattleStation = GameObject.Find("EnemyBattleStation").GetComponent<Transform>();
 
 
-        System.Random random = new System.Random();
+        
 
         int choice = random.Next(0, 10);
 

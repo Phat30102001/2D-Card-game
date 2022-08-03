@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 [RequireComponent(typeof(BoxCollider2D))]
 public class CardUse : MonoBehaviour,IPointerDownHandler
 {
-    public Card card;
+    private Card card;
 
     private EnemyCtrl enemyCtrl;
 
@@ -17,6 +17,8 @@ public class CardUse : MonoBehaviour,IPointerDownHandler
     private GameObject cardUI;
     private void Awake()
     {
+        card = Resources.Load<Card>("Prefabs/Cards/Fire");
+
         cardUI = GameObject.Find("Card");
 
         enemyCtrl = GameObject.Find("EnemyCtrl").GetComponent<EnemyCtrl>();

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ea595957182dca24d95a8156b08192c2, type: 3}
-  m_Name: Fire
+  m_Name: Heal
   m_EditorClassIdentifier: 
-  cardName: fire
-  cardImage: {fileID: 21300000, guid: 81c5226ccdb88db48bd11070264f8e1e, type: 3}
+  cardName: heal
+  cardImage: {fileID: 0}
