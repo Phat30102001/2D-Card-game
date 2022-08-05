@@ -4,26 +4,51 @@ using UnityEngine;
 
 public class CardInfo : MonoBehaviour
 {
-    private Card card;
-    // Start is called before the first frame update
+    public string cardName;
+    public Sprite cardImage;
+    public int attackPoint;
+    public int healPoint;
+
     void Awake()
     {
 
-        card = Resources.Load<Card>("Prefabs/Cards/Fire");
-
         // check card type
         System.Random random = new System.Random();
-        if (card.cardName != "Heal")
+        if (cardName != "Heal")
         {
-            card.AttackPoint = random.Next(1, 6);
-        }
-        else if (card.cardName == "Heal")
-        {
-            card.HealPoint = random.Next(1, 5);
-        }
+            attackPoint = random.Next(1, 6);
+            //GetAttackPoint();
 
+        }
+        else if (cardName == "Heal")
+        {
+            healPoint = random.Next(1, 5);
+            //GetHealPoint();
+        }
 
     }
 
-    
+    private void Start()
+    {
+        
+    }
+
+    public int GetAttackPoint()
+    {
+        //Debug.Log(attackPoint);
+        return attackPoint;
+       
+    }
+
+    public int GetHealPoint()
+    {
+        return healPoint;
+    }
+
+
+
+
+
+
+
 }

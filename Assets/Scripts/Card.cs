@@ -2,16 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New card", menuName = "Cards")]
-public class Card : ScriptableObject
-{   
-    
-    public string cardName;
-    public Sprite cardImage;
-    private int attackPoint;
-    private int healPoint;
 
-    public int AttackPoint { get; set; }
-    public int HealPoint { get; set; }
+public class Card : MonoBehaviour
+{
+
+    [SerializeField] private CardInfo cardInfo;
+
     
+
+
+    // Start is called before the first frame update
+    
+
+
 }

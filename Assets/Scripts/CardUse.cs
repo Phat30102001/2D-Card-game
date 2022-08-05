@@ -7,23 +7,44 @@ using UnityEngine.EventSystems;
 [RequireComponent(typeof(BoxCollider2D))]
 public class CardUse : MonoBehaviour,IPointerDownHandler
 {
-    private Card card;
+    
 
     private EnemyCtrl enemyCtrl;
 
     private BattleHUD enemyHUD;
 
+    //[SerializeField] private CardSpawner cardSpawner;
 
-    private GameObject cardUI;
+
+    //[SerializeField] private GameObject cardUI;
+
+    [SerializeField] private CardInfo cardInfo;
+
     private void Awake()
     {
-        card = Resources.Load<Card>("Prefabs/Cards/Fire");
+        //cardSpawner = GameObject.Find("CardInHand").GetComponent<CardSpawner>();
 
-        cardUI = GameObject.Find("Card");
+        //card = Resources.Load<Card>("Prefabs/Cards/Fire");
+
+
+
+        cardInfo = GetComponent<CardInfo>();
 
         enemyCtrl = GameObject.Find("EnemyCtrl").GetComponent<EnemyCtrl>();
 
         enemyHUD = GameObject.Find("EnemyHealthBar").GetComponent<BattleHUD>();
+    }
+
+
+    private void Start()
+    {
+        
+
+        //card = Resources.Load<Card>("Prefabs/Cards/Fire");
+
+        //cardUI = GameObject.Find(cardSpawner.gameObjectName);
+
+        
     }
     
     public void OnPointerDown(PointerEventData eventData)
@@ -33,14 +54,16 @@ public class CardUse : MonoBehaviour,IPointerDownHandler
 
         PlayerAttack();
 
-        //Destroy(cardUI);
+        Destroy(gameObject);
     }
     
     private void PlayerAttack()
     {   
         Debug.Log("you choose attack");
-        bool hpCheck = enemyCtrl.unit.TakeDamage(card.AttackPoint);
 
+        bool hpCheck = enemyCtrl.unit.TakeDamage(cardInfo.attackPoint);
+
+        Debug.Log("Player deal " + cardInfo.attackPoint + " " + cardInfo.cardName + " damage");
         enemyHUD.SetHP(enemyCtrl.unit.CurrentHp);
 
         if (hpCheck)

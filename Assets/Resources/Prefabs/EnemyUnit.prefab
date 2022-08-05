@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5652928093011706867}
-  - component: {fileID: 7312792072977069402}
+  - component: {fileID: -5481983761981991889}
   m_Layer: 0
   m_Name: EnemyUnit
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7312792072977069402
+--- !u!114 &-5481983761981991889
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,9 +41,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 8790472590959252580}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5412e5b1396a55c4994383934f823eae, type: 3}
+  m_Script: {fileID: 11500000, guid: 9cba5a39a351d65499f05fcadb8005ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 2
-  maxHp: 9
-  currentHp: 9

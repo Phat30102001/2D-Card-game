@@ -6,38 +6,63 @@ using UnityEngine.UI;
 
 public class CardDisplay : MonoBehaviour
 {
-    private Card card;
+    [SerializeField] private CardInfo cardInfo;
 
     private TextMeshProUGUI cardName;
     private TextMeshProUGUI cardDescripttion;
     private Image cardImage;
 
+    //private CardSpawner cardSpawner;
+
     private void Awake()
     {
-        cardName = GameObject.Find("CardName").GetComponent<TextMeshProUGUI>();
-        cardDescripttion = GameObject.Find("CardDescription").GetComponent<TextMeshProUGUI>();
-        cardImage = GameObject.Find("CardImage").GetComponent<Image>();
+        GameObject textInfoDescription = transform.GetChild(2).gameObject;
+        GameObject textDesDescription = textInfoDescription.transform.GetChild(0).gameObject;
 
-        card = Resources.Load<Card>("Prefabs/Cards/Fire");
+        GameObject textInfoName = transform.GetChild(1).gameObject;
+        GameObject textDesName = textInfoName.transform.GetChild(0).gameObject;
+
+        GameObject textDesImage = transform.GetChild(0).gameObject;
+
+
+        //cardSpawner = FindObjectOfType<CardSpawner>();
+
+        cardName = textDesName.GetComponent<TextMeshProUGUI>();
+        cardDescripttion = textDesDescription.GetComponent<TextMeshProUGUI>();
+        cardImage = textDesImage.GetComponent<Image>();
+
+        //cardInfo = GameObject.Find("Card0").GetComponent<CardInfo>();
+
+        
     }
 
     // Start is called before the first frame update
-    void Start()
-    {
-        cardName.text = card.cardName;
+    private void Start()
+    {   
+
+        cardInfo = GetComponent<CardInfo>();
+        
+        cardName.text = cardInfo.cardName;
 
         // check card type
-        if (card.cardName != "Heal")
+        if (cardInfo.cardName != "Heal")
         {
-            cardDescripttion.text = "Deal " +card.AttackPoint+ " "+card.cardName+ " damage";
+            
+            cardDescripttion.text = "Deal " +cardInfo.GetAttackPoint()+ " "+cardInfo.cardName+ " damage";
         }
-        else if (card.cardName == "Heal")
+        else if (cardInfo.cardName == "Heal")
         {
-            cardDescripttion.text = "Restore "+card.HealPoint+" health point";
+            cardDescripttion.text = "Restore "+cardInfo.healPoint+" health point";
         }
         
-        cardImage.sprite = card.cardImage;
-    }
+        cardImage.sprite = cardInfo.cardImage;
 
-    
+        //Debug.Log(cardInfo.gameObject.name);
+    }
+    /*private void Update()
+    {
+        Debug.Log("Found");
+    }*/
+
+
 }

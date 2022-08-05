@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum BattleState { START,PLAYERTURN,ENEMYTURN,NEXTSTAGE,LOSE}
+public enum BattleState { START,PLAYERTURN,ENEMYTURN,DRAWCARD,NEXTSTAGE,LOSE}
 
 
 public class BattleSystem : MonoBehaviour
@@ -27,6 +27,10 @@ public class BattleSystem : MonoBehaviour
     private StageGenerate stageGenerate;
     private EnemyCtrl enemyCtrl;
     private TurnNotify turnNotify;
+    private CardSpawner cardSpawner;
+    // 3 cards have been spawned when game started, so the next time card spawn will be the 4th one
+    int i = 3;
+
 
 
     // Singleton
@@ -35,6 +39,7 @@ public class BattleSystem : MonoBehaviour
         stageGenerate = GameObject.Find("Stage").GetComponent<StageGenerate>();
         enemyCtrl= GameObject.Find("EnemyCtrl").GetComponent<EnemyCtrl>();
         turnNotify= GetComponent<TurnNotify>();
+        
 
         instance = this;
     }
@@ -65,6 +70,9 @@ public class BattleSystem : MonoBehaviour
             case BattleState.NEXTSTAGE:
                 break;
             case BattleState.LOSE:
+                break;
+            case BattleState.DRAWCARD:
+                cardSpawner.Spawn(i);
                 break;
         }
     }

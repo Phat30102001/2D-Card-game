@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class StageGenerate : MonoBehaviour
 {
-    
-    
+    [SerializeField] private CardSpawner cardSpawner;
+
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private GameObject enemyPrefab;
 
@@ -50,6 +50,8 @@ public class StageGenerate : MonoBehaviour
 
         playerCtrl = GameObject.Find("PlayerCtrl").GetComponent<PlayerCtrl>();
         enemyCtrl = GameObject.Find("EnemyCtrl").GetComponent<EnemyCtrl>();
+
+        cardSpawner= GameObject.Find("CardOnHand").GetComponent<CardSpawner>();
     }
 
     public IEnumerator SetUpBattle()
@@ -69,8 +71,15 @@ public class StageGenerate : MonoBehaviour
         yield return new WaitForSeconds(2f);
 
         BattleSystem.instance.UpdateBattleState(BattleState.PLAYERTURN);
+
+        //Start the game with 3 card
+        for(int i = 0; i < 3; i++)
+        {
+            cardSpawner.Spawn(i);
+        }
         
     }
+    
 
     public void HandleStageGen()
     {

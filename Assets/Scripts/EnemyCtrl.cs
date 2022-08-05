@@ -14,7 +14,7 @@ public class EnemyCtrl : MonoBehaviour
 
 
         unit.Damage = random.Next(2,4);
-        unit.MaxHp = random.Next(4, 15);
+        unit.MaxHp = random.Next(8, 21);
         unit.CurrentHp = unit.MaxHp;
         unit.Element = "ice";
     }
