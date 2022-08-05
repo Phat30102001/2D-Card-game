@@ -48,6 +48,7 @@ public class EnemySkill : MonoBehaviour
                 StartCoroutine(Heal());
                 break;
         }
+        
 
     }
     /*public void IsDead()
@@ -88,6 +89,8 @@ public class EnemySkill : MonoBehaviour
             BattleSystem.instance.EndBattle(false);
         }
         else
+            CardSpawner.instance.Spawn();
+
             BattleSystem.instance.UpdateBattleState(BattleState.PLAYERTURN);
 
     }
@@ -102,6 +105,8 @@ public class EnemySkill : MonoBehaviour
         Debug.Log("Enemy use Heal");
 
         yield return new WaitForSeconds(1f);
+
+        CardSpawner.instance.Spawn();
 
         BattleSystem.instance.UpdateBattleState(BattleState.PLAYERTURN);
     }

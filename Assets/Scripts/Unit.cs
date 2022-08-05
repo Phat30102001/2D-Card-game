@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Unit : MonoBehaviour
 {
-    private string[] elemental = {"none","fire","ice","thunder","wind"};
+    private string[] elemental = {"None","Fire","Ice","Thunder","Wind"};
     private string element;
     private int damage;
     private int maxHp;
@@ -55,12 +55,7 @@ public class Unit : MonoBehaviour
         set
         {
             element = value;
-            for(int i = 0; i < elemental.Length; i++)
-            {
-                //Debug.Log("check element " + elemental[i]+ " "+element);
-                if (element == elemental[i]) return;
-            }
-            element = "none";
+            
         }
     }
 

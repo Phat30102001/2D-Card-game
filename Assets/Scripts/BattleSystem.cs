@@ -27,9 +27,9 @@ public class BattleSystem : MonoBehaviour
     private StageGenerate stageGenerate;
     private EnemyCtrl enemyCtrl;
     private TurnNotify turnNotify;
-    private CardSpawner cardSpawner;
-    // 3 cards have been spawned when game started, so the next time card spawn will be the 4th one
-    int i = 3;
+
+
+ 
 
 
 
@@ -39,7 +39,8 @@ public class BattleSystem : MonoBehaviour
         stageGenerate = GameObject.Find("Stage").GetComponent<StageGenerate>();
         enemyCtrl= GameObject.Find("EnemyCtrl").GetComponent<EnemyCtrl>();
         turnNotify= GetComponent<TurnNotify>();
-        
+
+
 
         instance = this;
     }
@@ -71,66 +72,15 @@ public class BattleSystem : MonoBehaviour
                 break;
             case BattleState.LOSE:
                 break;
-            case BattleState.DRAWCARD:
-                cardSpawner.Spawn(i);
-                break;
+            /*case BattleState.DRAWCARD:
+                cardSpawner.Spawn();
+                break;*/
         }
     }
 
     
 
-    /*private IEnumerator SetUpBattle()
-    {
-        GameObject playerGO= Instantiate(playerPrefab, playerBattleStation);
-        playerUnit =playerGO.GetComponent<Unit>();
-
-        GameObject enemyGO= Instantiate(enemyPrefab, enemyBattleStation);
-        enemyUnit = enemyGO.GetComponent<Unit>();
-
-        Debug.Log("Battle start");
-
-        playerHUD.SetHUD(playerUnit);
-        enemyHUD.SetHUD(enemyUnit);
-
-        yield return new WaitForSeconds(2f);
-
-        //state = BattleState.PLAYERTURN;
-        UpdateBattleState(BattleState.PLAYERTURN);
-    }*/
-
-   /* private void PlayerTurn()
-    {
-        
-    }*/
-
-    /*public void OnAttackButton()
-    {
-        if (state != BattleState.PLAYERTURN) return;
-
-        StartCoroutine(PlayerAttack());
-        Debug.Log("you choose attack");
-    }
-
-    private IEnumerator PlayerAttack()
-    {
-        bool hpCheck= enemyUnit.TakeDamage(playerUnit.damage);
-
-        enemyHUD.SetHP(enemyUnit.currentHp);
-
-        yield return new WaitForSeconds(2f);
-
-        if (hpCheck)
-        {
-            state = BattleState.DECIDE;
-            EndBattle(true);
-        }
-        else
-        {
-            state = BattleState.ENEMYTURN;
-            StartCoroutine( EnemyTurn());
-        }
     
-    }*/
 
     
 

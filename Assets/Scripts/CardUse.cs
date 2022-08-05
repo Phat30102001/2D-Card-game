@@ -73,9 +73,23 @@ public class CardUse : MonoBehaviour,IPointerDownHandler
         }
         else
         {
-            BattleSystem.instance.UpdateBattleState(BattleState.ENEMYTURN);
+
+
+            CheckElement();
+
         }
         
 
     }
+
+    private void CheckElement()
+    {
+        Debug.Log(enemyCtrl.unit.Element);
+        if (cardInfo.cardName != enemyCtrl.unit.Element) BattleSystem.instance.UpdateBattleState(BattleState.ENEMYTURN);
+        else {
+            CardSpawner.instance.Spawn();
+            BattleSystem.instance.UpdateBattleState(BattleState.PLAYERTURN); 
+        }
+    }
+
 }

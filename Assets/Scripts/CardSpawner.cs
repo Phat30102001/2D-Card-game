@@ -6,26 +6,17 @@ public class CardSpawner : MonoBehaviour
 {
     public GameObject card;
     GameObject newCard;
-    
+
+    public static CardSpawner instance;
 
     public string gameObjectName;
 
-    public string gameObjectNameClone { get { return gameObjectName; } }
-  
-
-    private void Start()
+    private void Awake()
     {
-
-        CardRandomize();
-
+        instance = this;
     }
 
-    private void CardRandomize()
-    {
-        
-    }
-    
-    public void Spawn(int i)
+    public void Spawn()
     {   
         System.Random random = new System.Random();
 
@@ -39,11 +30,9 @@ public class CardSpawner : MonoBehaviour
         //spawn card
         
         
-        gameObjectName = "Card" +i;
+        gameObjectName = "Card" ;
         newCard=Instantiate(card);
         newCard.name = gameObjectName;
-
-        //Debug.Log(gameObjectNameClone);
 
         //make card game object create inside father game object (CardInHand)
         newCard.transform.SetParent(GameObject.FindGameObjectWithTag("CardOnHand").transform,false);

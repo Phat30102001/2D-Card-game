@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class StageGenerate : MonoBehaviour
 {
-    [SerializeField] private CardSpawner cardSpawner;
 
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private GameObject enemyPrefab;
@@ -42,7 +41,7 @@ public class StageGenerate : MonoBehaviour
 
         
 
-        int choice = random.Next(0, 10);
+        //int choice = random.Next(0, 10);
 
         playerHUD = GameObject.Find("PlayerHealthBar").GetComponent<BattleHUD>();
         enemyHUD = GameObject.Find("EnemyHealthBar").GetComponent<BattleHUD>();
@@ -51,7 +50,7 @@ public class StageGenerate : MonoBehaviour
         playerCtrl = GameObject.Find("PlayerCtrl").GetComponent<PlayerCtrl>();
         enemyCtrl = GameObject.Find("EnemyCtrl").GetComponent<EnemyCtrl>();
 
-        cardSpawner= GameObject.Find("CardOnHand").GetComponent<CardSpawner>();
+
     }
 
     public IEnumerator SetUpBattle()
@@ -75,7 +74,7 @@ public class StageGenerate : MonoBehaviour
         //Start the game with 3 card
         for(int i = 0; i < 3; i++)
         {
-            cardSpawner.Spawn(i);
+            CardSpawner.instance.Spawn();
         }
         
     }
