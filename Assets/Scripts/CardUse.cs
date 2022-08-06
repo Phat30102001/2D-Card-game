@@ -52,9 +52,22 @@ public class CardUse : MonoBehaviour,IPointerDownHandler
         //card can only be used in player turn
         if (BattleSystem.instance.state != BattleState.PLAYERTURN) return;
 
+        Debug.Log(enemyCtrl.unit.Element);
+
+        if (cardInfo.cardName == enemyCtrl.unit.Element)
+        {
+            Debug.Log("Player deal 0 damage");
+
+            BattleSystem.instance.UpdateBattleState(BattleState.ENEMYTURN);
+
+            Destroy(gameObject);
+
+            return;
+        }
+
         PlayerAttack();
 
-        Destroy(gameObject);
+        
     }
     
     private void PlayerAttack()
@@ -78,16 +91,18 @@ public class CardUse : MonoBehaviour,IPointerDownHandler
             CheckElement();
 
         }
-        
+
+        Destroy(gameObject);
+
 
     }
 
     private void CheckElement()
     {
-        Debug.Log(enemyCtrl.unit.Element);
-        if (cardInfo.cardName != enemyCtrl.unit.Element) BattleSystem.instance.UpdateBattleState(BattleState.ENEMYTURN);
+        
+        if (cardInfo.cardName != enemyCtrl.unit.Weakness) BattleSystem.instance.UpdateBattleState(BattleState.ENEMYTURN);
         else {
-            CardSpawner.instance.Spawn();
+            CardSpawner.instance.HandleSpawnCard();
             BattleSystem.instance.UpdateBattleState(BattleState.PLAYERTURN); 
         }
     }

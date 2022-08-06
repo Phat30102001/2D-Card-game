@@ -62,7 +62,9 @@ public class StageGenerate : MonoBehaviour
         enemyUnit = enemyGO.GetComponent<Unit>();
 
         Debug.Log("Battle start");
+        Debug.Log("enemy's weakness is " + enemyCtrl.unit.Weakness);
         Debug.Log("enemy's element is " + enemyCtrl.unit.Element);
+
 
         playerHUD.SetHUD(playerCtrl.unit.MaxHp,playerCtrl.unit.CurrentHp);
         enemyHUD.SetHUD(enemyCtrl.unit.MaxHp,enemyCtrl.unit.CurrentHp);
@@ -74,7 +76,7 @@ public class StageGenerate : MonoBehaviour
         //Start the game with 3 card
         for(int i = 0; i < 3; i++)
         {
-            CardSpawner.instance.Spawn();
+            CardSpawner.instance.HandleSpawnCard();
         }
         
     }

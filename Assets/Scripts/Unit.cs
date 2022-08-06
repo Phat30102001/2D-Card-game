@@ -5,8 +5,9 @@ using UnityEngine;
 
 public class Unit : MonoBehaviour
 {
-    private string[] elemental = {"None","Fire","Ice","Thunder","Wind"};
+    //private string[] elemental = {"None","Fire","Ice","Thunder","Wind"};
     private string element;
+    private string weakness;
     private int damage;
     private int maxHp;
     private int currentHp;
@@ -55,6 +56,17 @@ public class Unit : MonoBehaviour
         set
         {
             element = value;
+            
+        }
+    }public string Weakness
+    {
+        get
+        {
+            return weakness;
+        }
+        set
+        {
+            weakness = value;
             
         }
     }

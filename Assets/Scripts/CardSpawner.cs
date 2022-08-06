@@ -16,18 +16,25 @@ public class CardSpawner : MonoBehaviour
         instance = this;
     }
 
-    public void Spawn()
+    public void HandleSpawnCard()
+    {
+        StartCoroutine(Spawn());
+    }
+
+    private IEnumerator Spawn()
     {   
         System.Random random = new System.Random();
 
         int cardPrefab = random.Next(1,5);
 
         card = Resources.Load<GameObject>("Prefabs/Cards/"+cardPrefab);
-        
+
         //Debug.Log(cardPrefab);
 
 
         //spawn card
+
+        
         
         
         gameObjectName = "Card" ;
@@ -36,6 +43,9 @@ public class CardSpawner : MonoBehaviour
 
         //make card game object create inside father game object (CardInHand)
         newCard.transform.SetParent(GameObject.FindGameObjectWithTag("CardOnHand").transform,false);
+
+        yield return new WaitForSeconds(0.1f);
+
 
     }
 

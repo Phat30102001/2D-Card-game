@@ -11,6 +11,9 @@ public class EnemyCtrl : MonoBehaviour
 
     void Awake()
     {
+        int elementNum = 0;
+        int weaknessNum = 0;
+        
         enemySkill = GameObject.Find("EnemyPrefab").GetComponent<EnemySkill>();
         unit = Resources.Load<Unit>("Prefabs/EnemyUnit");
 
@@ -21,9 +24,15 @@ public class EnemyCtrl : MonoBehaviour
         unit.MaxHp = random.Next(8, 21);
         unit.CurrentHp = unit.MaxHp;
 
-        int elementNum = random.Next(0, 4);
+        
+
+        while (elementNum == weaknessNum) {
+            elementNum = random.Next(0, 4); 
+            weaknessNum = random.Next(0, 4);
+        }
 
         unit.Element = element[elementNum];
+        unit.Weakness = element[weaknessNum];
         //Debug.Log(elementNum);
     }
     public void HandleEnemyTurn()

@@ -89,9 +89,13 @@ public class EnemySkill : MonoBehaviour
             BattleSystem.instance.EndBattle(false);
         }
         else
-            CardSpawner.instance.Spawn();
-
+        {
+            CardSpawner.instance.HandleSpawnCard();
             BattleSystem.instance.UpdateBattleState(BattleState.PLAYERTURN);
+
+
+        }
+            
 
     }
     private IEnumerator Heal()
@@ -106,7 +110,7 @@ public class EnemySkill : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
-        CardSpawner.instance.Spawn();
+        CardSpawner.instance.HandleSpawnCard();
 
         BattleSystem.instance.UpdateBattleState(BattleState.PLAYERTURN);
     }
