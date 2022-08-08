@@ -8,7 +8,6 @@ using UnityEngine;
 public class EnemySkill : MonoBehaviour
 {
 
-
     private EnemyCtrl enemyCtrl;
     private PlayerCtrl playerCtrl;
 
@@ -31,11 +30,13 @@ public class EnemySkill : MonoBehaviour
     {
         //Debug.Log("Enemy turn");
 
-
-
+       
         System.Random random = new System.Random();
 
         int choice= random.Next(0,2);
+
+
+
         //Debug.Log(choice);
         switch (choice)
         {
@@ -114,4 +115,7 @@ public class EnemySkill : MonoBehaviour
 
         BattleSystem.instance.UpdateBattleState(BattleState.PLAYERTURN);
     }
+    
+ 
+
 }

@@ -7,11 +7,11 @@ using UnityEngine.EventSystems;
 [RequireComponent(typeof(BoxCollider2D))]
 public class CardUse : MonoBehaviour,IPointerDownHandler
 {
-    
-
+    private PlayerCtrl playerCtrl;
     private EnemyCtrl enemyCtrl;
 
     private BattleHUD enemyHUD;
+    private BattleHUD playerHUD;
 
     //[SerializeField] private CardSpawner cardSpawner;
 
@@ -26,13 +26,14 @@ public class CardUse : MonoBehaviour,IPointerDownHandler
 
         //card = Resources.Load<Card>("Prefabs/Cards/Fire");
 
-
+        playerCtrl = GameObject.Find("PlayerCtrl").GetComponent<PlayerCtrl>();
 
         cardInfo = GetComponent<CardInfo>();
 
         enemyCtrl = GameObject.Find("EnemyCtrl").GetComponent<EnemyCtrl>();
 
         enemyHUD = GameObject.Find("EnemyHealthBar").GetComponent<BattleHUD>();
+        playerHUD = GameObject.Find("PlayerHealthBar").GetComponent<BattleHUD>();
     }
 
 
@@ -52,26 +53,43 @@ public class CardUse : MonoBehaviour,IPointerDownHandler
         //card can only be used in player turn
         if (BattleSystem.instance.state != BattleState.PLAYERTURN) return;
 
-        Debug.Log(enemyCtrl.unit.Element);
+        //if(cardInfo.cardName=="Heal")
 
-        if (cardInfo.cardName == enemyCtrl.unit.Element)
+
+        /*if (cardInfo.cardName == enemyCtrl.unit.Element)
         {
-            Debug.Log("Player deal 0 damage");
+            // repel 2 damgage when penalty
+            bool hpCheck = playerCtrl.unit.TakeDamage(2);
+            playerHUD.SetHP(playerCtrl.unit.CurrentHp);
+
+            Debug.Log("Player take 2 damage because of penalty");
 
             BattleSystem.instance.UpdateBattleState(BattleState.ENEMYTURN);
 
             Destroy(gameObject);
 
             return;
+        }*/
+        if(cardInfo.cardName == "Heal")
+        {
+            PlayerHeal();
+        }
+        else
+        {
+            if(cardInfo.cardName == enemyCtrl.unit.Element) PenaltyCheck();
+            else PlayerAttack();
         }
 
-        PlayerAttack();
+        
+
+        
 
         
     }
     
     private void PlayerAttack()
-    {   
+    {
+
         Debug.Log("you choose attack");
 
         bool hpCheck = enemyCtrl.unit.TakeDamage(cardInfo.attackPoint);
@@ -94,7 +112,41 @@ public class CardUse : MonoBehaviour,IPointerDownHandler
 
         Destroy(gameObject);
 
+    }
 
+    private void PlayerHeal()
+    {
+
+        Debug.Log("Player restore " + cardInfo.healPoint + " hp");
+
+        playerCtrl.unit.Healpoint(cardInfo.healPoint);
+
+        playerHUD.SetHP(playerCtrl.unit.CurrentHp);
+
+        Destroy(gameObject);
+
+        BattleSystem.instance.UpdateBattleState(BattleState.ENEMYTURN);
+    }
+
+    private void PenaltyCheck()
+    {
+        
+        // repel 2 damgage when penalty
+        bool hpCheck = playerCtrl.unit.TakeDamage(2);
+        playerHUD.SetHP(playerCtrl.unit.CurrentHp);
+
+        Debug.Log("Player take 2 damage because of penalty");
+
+        if (hpCheck)
+        {
+            BattleSystem.instance.UpdateBattleState(BattleState.LOSE);
+            BattleSystem.instance.EndBattle(false);
+        }
+        else BattleSystem.instance.UpdateBattleState(BattleState.ENEMYTURN);
+
+        Destroy(gameObject);
+
+        
     }
 
     private void CheckElement()
@@ -107,4 +159,5 @@ public class CardUse : MonoBehaviour,IPointerDownHandler
         }
     }
 
+ 
 }

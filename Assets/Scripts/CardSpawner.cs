@@ -25,7 +25,7 @@ public class CardSpawner : MonoBehaviour
     {   
         System.Random random = new System.Random();
 
-        int cardPrefab = random.Next(1,5);
+        int cardPrefab = random.Next(1,6);
 
         card = Resources.Load<GameObject>("Prefabs/Cards/"+cardPrefab);
 
