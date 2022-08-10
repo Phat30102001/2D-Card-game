@@ -16,12 +16,12 @@ public class CardSpawner : MonoBehaviour
         instance = this;
     }
 
-    public void HandleSpawnCard()
+    /*public void HandleSpawnCard()
     {
         StartCoroutine(Spawn());
-    }
+    }*/
 
-    private IEnumerator Spawn()
+    public void HandleSpawnCard()
     {   
         System.Random random = new System.Random();
 
@@ -33,8 +33,6 @@ public class CardSpawner : MonoBehaviour
 
 
         //spawn card
-
-        
         
         
         gameObjectName = "Card" ;
@@ -44,7 +42,7 @@ public class CardSpawner : MonoBehaviour
         //make card game object create inside father game object (CardInHand)
         newCard.transform.SetParent(GameObject.FindGameObjectWithTag("CardOnHand").transform,false);
 
-        yield return new WaitForSeconds(0.1f);
+
 
 
     }

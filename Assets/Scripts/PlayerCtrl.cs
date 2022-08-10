@@ -18,7 +18,7 @@ public class PlayerCtrl : MonoBehaviour
 
 
         //unit.Damage = 3;
-        unit.MaxHp = 10;
+        unit.MaxHp = 50;
         unit.CurrentHp = unit.MaxHp;
         unit.Element = "none";
 

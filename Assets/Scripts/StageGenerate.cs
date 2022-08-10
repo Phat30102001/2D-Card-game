@@ -53,7 +53,7 @@ public class StageGenerate : MonoBehaviour
 
     }
 
-    public IEnumerator SetUpBattle()
+    /*public IEnumerator SetUpBattle()
     {
         GameObject playerGO = Instantiate(playerPrefab, playerBattleStation);
         playerUnit = playerGO.GetComponent<Unit>();
@@ -79,12 +79,56 @@ public class StageGenerate : MonoBehaviour
             CardSpawner.instance.HandleSpawnCard();
         }
         
+    }*/
+
+    private IEnumerator PlayerSpawn()
+    {
+        yield return new WaitForSeconds(1f);
+        GameObject playerGO = Instantiate(playerPrefab, playerBattleStation);
+        playerUnit = playerGO.GetComponent<Unit>();
+
+        playerHUD.SetHUD(playerCtrl.unit.MaxHp, playerCtrl.unit.CurrentHp);
+
+        //Start the game with 3 card
+        for (int i = 0; i < 3; i++)
+        {
+            CardSpawner.instance.HandleSpawnCard();
+        }
+
+        BattleSystem.instance.UpdateBattleState(BattleState.PLAYERTURN);
     }
-    
+
+    private IEnumerator EnemySpawn()
+    {   
+        yield return new WaitForSeconds(1f);
+        
+        GameObject enemyGO = Instantiate(enemyPrefab, enemyBattleStation);
+        enemyUnit = enemyGO.GetComponent<Unit>();
+
+        enemyHUD.SetHUD(enemyCtrl.unit.MaxHp, enemyCtrl.unit.CurrentHp);
+
+        Debug.Log("Battle start");
+        Debug.Log("enemy's weakness is " + enemyCtrl.unit.Weakness);
+        Debug.Log("enemy's element is " + enemyCtrl.unit.Element);
+
+        
+    }
+
+
 
     public void HandleStageGen()
     {
-        StartCoroutine(SetUpBattle());
+        StartCoroutine(PlayerSpawn());
+        StartCoroutine(EnemySpawn());
+
+        
+
+        //BattleSystem.instance.UpdateBattleState(BattleState.PLAYERTURN);
+    }
+
+    public void HandleNextStageGen()
+    {
+        
     }
 
 }
