@@ -69,6 +69,7 @@ public class BattleSystem : MonoBehaviour
                 enemyCtrl.HandleEnemyTurn();
                 break;
             case BattleState.NEXTSTAGE:
+                stageGenerate.HandleNextStageGen();
                 break;
             case BattleState.LOSE:
                 break;

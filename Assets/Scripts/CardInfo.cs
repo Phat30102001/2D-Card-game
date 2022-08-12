@@ -22,7 +22,7 @@ public class CardInfo : MonoBehaviour
         }
         else if (cardName == "Heal")
         {
-            healPoint = random.Next(1, 5);
+            healPoint = random.Next(3, 11);
             //GetHealPoint();
         }
 

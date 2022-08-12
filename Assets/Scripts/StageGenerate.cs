@@ -24,13 +24,13 @@ public class StageGenerate : MonoBehaviour
 
     private void Awake()
     {
-        System.Random random = new System.Random();
+        //System.Random random = new System.Random();
 
 
         playerPrefab = Resources.Load<GameObject>("Prefabs/Player");
-        int enemyNum=random.Next(1,3);
+        /*int enemyNum=random.Next(1,3);
         string enemyPath="Prefabs/Enemy"+enemyNum;
-        enemyPrefab = Resources.Load<GameObject>(enemyPath);
+        enemyPrefab = Resources.Load<GameObject>(enemyPath);*/
 
         
 
@@ -99,7 +99,14 @@ public class StageGenerate : MonoBehaviour
     }
 
     private IEnumerator EnemySpawn()
-    {   
+    {
+        System.Random random = new System.Random();
+        int enemyNum = random.Next(1, 3);
+        string enemyPath = "Prefabs/Enemy" + enemyNum;
+        enemyPrefab = Resources.Load<GameObject>(enemyPath);
+
+        enemyCtrl.StateGen();
+
         yield return new WaitForSeconds(1f);
         
         GameObject enemyGO = Instantiate(enemyPrefab, enemyBattleStation);
@@ -128,7 +135,9 @@ public class StageGenerate : MonoBehaviour
 
     public void HandleNextStageGen()
     {
-        
+        StartCoroutine(EnemySpawn());
+        CardSpawner.instance.HandleSpawnCard();
+        BattleSystem.instance.UpdateBattleState(BattleState.PLAYERTURN);
     }
 
 }
