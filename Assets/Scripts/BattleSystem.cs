@@ -27,11 +27,9 @@ public class BattleSystem : MonoBehaviour
     private StageGenerate stageGenerate;
     private EnemyCtrl enemyCtrl;
     private TurnNotify turnNotify;
-
-
- 
-
-
+    private FloorCount floorCount;
+    //count the floor clear
+    int count = 0;
 
     // Singleton
     private void Awake()
@@ -40,7 +38,7 @@ public class BattleSystem : MonoBehaviour
         enemyCtrl= GameObject.Find("EnemyCtrl").GetComponent<EnemyCtrl>();
         turnNotify= GetComponent<TurnNotify>();
 
-
+        floorCount = GetComponent<FloorCount>();
 
         instance = this;
     }
@@ -69,6 +67,8 @@ public class BattleSystem : MonoBehaviour
                 enemyCtrl.HandleEnemyTurn();
                 break;
             case BattleState.NEXTSTAGE:
+                count++;
+                floorCount.Count(count);
                 stageGenerate.HandleNextStageGen();
                 break;
             case BattleState.LOSE:
@@ -78,13 +78,6 @@ public class BattleSystem : MonoBehaviour
                 break;*/
         }
     }
-
-    
-
-    
-
-    
-
     public void EndBattle(bool decision)
     {
         if (decision==true) Debug.Log("Win");

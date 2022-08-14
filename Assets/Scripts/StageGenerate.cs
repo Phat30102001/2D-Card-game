@@ -90,7 +90,7 @@ public class StageGenerate : MonoBehaviour
         playerHUD.SetHUD(playerCtrl.unit.MaxHp, playerCtrl.unit.CurrentHp);
 
         //Start the game with 3 card
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 5; i++)
         {
             CardSpawner.instance.HandleSpawnCard();
         }

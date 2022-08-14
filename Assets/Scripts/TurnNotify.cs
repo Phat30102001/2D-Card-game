@@ -12,8 +12,9 @@ public class TurnNotify : MonoBehaviour
 
     private void Awake()
     {
-        turnName = GameObject.Find("Turn").GetComponent<TextMeshProUGUI>();
         turn = GameObject.Find("Turn");
+        turnName = turn.GetComponent<TextMeshProUGUI>();
+        
     }
     private void Start()
     {

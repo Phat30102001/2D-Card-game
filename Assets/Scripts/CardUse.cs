@@ -13,11 +13,6 @@ public class CardUse : MonoBehaviour,IPointerDownHandler
     private BattleHUD enemyHUD;
     private BattleHUD playerHUD;
 
-    //[SerializeField] private CardSpawner cardSpawner;
-
-
-    //[SerializeField] private GameObject cardUI;
-
     [SerializeField] private CardInfo cardInfo;
 
     private void Awake()
@@ -34,6 +29,8 @@ public class CardUse : MonoBehaviour,IPointerDownHandler
 
         enemyHUD = GameObject.Find("EnemyHealthBar").GetComponent<BattleHUD>();
         playerHUD = GameObject.Find("PlayerHealthBar").GetComponent<BattleHUD>();
+
+
     }
 
 
@@ -151,8 +148,9 @@ public class CardUse : MonoBehaviour,IPointerDownHandler
 
     private void CheckElement()
     {
-        
-        if (cardInfo.cardName != enemyCtrl.unit.Weakness) BattleSystem.instance.UpdateBattleState(BattleState.ENEMYTURN);
+        if (cardInfo.cardName != enemyCtrl.unit.Weakness) {
+            BattleSystem.instance.UpdateBattleState(BattleState.ENEMYTURN);
+        } 
         else {
             CardSpawner.instance.HandleSpawnCard();
             BattleSystem.instance.UpdateBattleState(BattleState.PLAYERTURN); 
