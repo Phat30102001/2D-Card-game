@@ -22,6 +22,8 @@ public class StageGenerate : MonoBehaviour
 
     GameObject tempBattleStation;
 
+    GameObject enemyGO;
+
     private void Awake()
     {
         //System.Random random = new System.Random();
@@ -101,15 +103,16 @@ public class StageGenerate : MonoBehaviour
     private IEnumerator EnemySpawn()
     {
         System.Random random = new System.Random();
-        int enemyNum = random.Next(1, 3);
+        int enemyNum = random.Next(1, 5);
         string enemyPath = "Prefabs/Enemy" + enemyNum;
         enemyPrefab = Resources.Load<GameObject>(enemyPath);
 
         enemyCtrl.StateGen();
 
         yield return new WaitForSeconds(1f);
-        
-        GameObject enemyGO = Instantiate(enemyPrefab, enemyBattleStation);
+
+        if (enemyGO != null) Destroy(enemyGO);
+        enemyGO = Instantiate(enemyPrefab, enemyBattleStation);
         enemyUnit = enemyGO.GetComponent<Unit>();
 
         enemyHUD.SetHUD(enemyCtrl.unit.MaxHp, enemyCtrl.unit.CurrentHp);

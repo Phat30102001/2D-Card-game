@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 
+
 [RequireComponent(typeof(BoxCollider2D))]
 public class CardUse : MonoBehaviour,IPointerDownHandler
 {
@@ -12,6 +13,9 @@ public class CardUse : MonoBehaviour,IPointerDownHandler
 
     private BattleHUD enemyHUD;
     private BattleHUD playerHUD;
+
+    private GameObject playerPrefab;
+    private GameObject enemyPrefab;
 
     [SerializeField] private CardInfo cardInfo;
 
@@ -29,6 +33,10 @@ public class CardUse : MonoBehaviour,IPointerDownHandler
 
         enemyHUD = GameObject.Find("EnemyHealthBar").GetComponent<BattleHUD>();
         playerHUD = GameObject.Find("PlayerHealthBar").GetComponent<BattleHUD>();
+
+        playerPrefab = GameObject.Find("PlayerPrefab");
+        enemyPrefab = GameObject.Find("EnemyPrefab");
+
 
 
     }
@@ -77,6 +85,7 @@ public class CardUse : MonoBehaviour,IPointerDownHandler
             else PlayerAttack();
         }
 
+
         
 
         
@@ -93,7 +102,7 @@ public class CardUse : MonoBehaviour,IPointerDownHandler
 
         Debug.Log("Player deal " + cardInfo.attackPoint + " " + cardInfo.cardName + " damage");
         enemyHUD.SetHP(enemyCtrl.unit.CurrentHp);
-
+        DotweenAnimateEffect.instance.AttackAnimation(playerPrefab,enemyPrefab,true);
         if (hpCheck)
         {
             BattleSystem.instance.UpdateBattleState(BattleState.NEXTSTAGE);
@@ -101,7 +110,6 @@ public class CardUse : MonoBehaviour,IPointerDownHandler
         }
         else
         {
-
 
             CheckElement();
 

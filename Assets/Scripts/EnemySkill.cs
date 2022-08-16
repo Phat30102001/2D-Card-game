@@ -15,6 +15,9 @@ public class EnemySkill : MonoBehaviour
     private BattleHUD enemyHUD;
     private BattleHUD playerHUD;
 
+    private GameObject playerPrefab;
+    private GameObject enemyPrefab;
+
 
     private void Awake()
     {
@@ -24,6 +27,8 @@ public class EnemySkill : MonoBehaviour
         enemyHUD = GameObject.Find("EnemyHealthBar").GetComponent<BattleHUD>();
         playerHUD = GameObject.Find("PlayerHealthBar").GetComponent<BattleHUD>();
 
+        playerPrefab = GameObject.Find("PlayerPrefab");
+        enemyPrefab = GameObject.Find("EnemyPrefab");
     }
 
     public void Action()
@@ -69,6 +74,8 @@ public class EnemySkill : MonoBehaviour
     private IEnumerator NormalAttack()
     {
         yield return new WaitForSeconds(1f);
+
+        DotweenAnimateEffect.instance.AttackAnimation(enemyPrefab, playerPrefab,false);
 
         System.Random random = new System.Random();
 
