@@ -28,6 +28,8 @@ public class BattleSystem : MonoBehaviour
     private EnemyCtrl enemyCtrl;
     private TurnNotify turnNotify;
     private FloorCount floorCount;
+
+
     //count the floor clear
     int count = 0;
 
@@ -44,7 +46,7 @@ public class BattleSystem : MonoBehaviour
     }
     private void Start()
     {
-        
+
         UpdateBattleState(BattleState.START);
     }
     public void UpdateBattleState(BattleState newState)
@@ -72,6 +74,7 @@ public class BattleSystem : MonoBehaviour
                 stageGenerate.HandleNextStageGen();
                 break;
             case BattleState.LOSE:
+
                 break;
             /*case BattleState.DRAWCARD:
                 cardSpawner.Spawn();
