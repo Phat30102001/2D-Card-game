@@ -14,7 +14,7 @@ public class PlayerCtrl : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Awake()
+    public void StatGen()
     {
         unit = Resources.Load<Unit>("Prefabs/Player");
 

@@ -17,6 +17,8 @@ public class CardUse : MonoBehaviour,IPointerDownHandler
     private GameObject playerPrefab;
     private GameObject enemyPrefab;
 
+    private CardDestroy cardDestroy;
+
     [SerializeField] private CardInfo cardInfo;
 
     private void Awake()
@@ -36,6 +38,8 @@ public class CardUse : MonoBehaviour,IPointerDownHandler
 
         playerPrefab = GameObject.Find("PlayerPrefab");
         enemyPrefab = GameObject.Find("EnemyPrefab");
+
+        cardDestroy = GameObject.Find("CardOnHand").GetComponent<CardDestroy>();
 
 
 
@@ -106,7 +110,7 @@ public class CardUse : MonoBehaviour,IPointerDownHandler
         if (hpCheck)
         {
             BattleSystem.instance.UpdateBattleState(BattleState.NEXTSTAGE);
-            BattleSystem.instance.EndBattle(true);
+            //BattleSystem.instance.EndBattle(true);
         }
         else
         {
@@ -115,7 +119,7 @@ public class CardUse : MonoBehaviour,IPointerDownHandler
 
         }
 
-        Destroy(gameObject);
+        cardDestroy.DestroyCard(gameObject);
 
     }
 
@@ -128,7 +132,7 @@ public class CardUse : MonoBehaviour,IPointerDownHandler
 
         playerHUD.SetHP(playerCtrl.unit.CurrentHp);
 
-        Destroy(gameObject);
+        cardDestroy.DestroyCard(gameObject);
 
         BattleSystem.instance.UpdateBattleState(BattleState.ENEMYTURN);
     }
@@ -137,21 +141,21 @@ public class CardUse : MonoBehaviour,IPointerDownHandler
     {
         
         // repel 2 damgage when penalty
-        bool hpCheck = playerCtrl.unit.TakeDamage(2);
+        bool hpCheck = playerCtrl.unit.TakeDamage(4);
         playerHUD.SetHP(playerCtrl.unit.CurrentHp);
 
-        Debug.Log("Player take 2 damage because of penalty");
+        Debug.Log("Player take 4 damage because of penalty");
 
         if (hpCheck)
         {
             BattleSystem.instance.UpdateBattleState(BattleState.LOSE);
-            BattleSystem.instance.EndBattle(false);
+            //BattleSystem.instance.EndBattle(false);
         }
         else BattleSystem.instance.UpdateBattleState(BattleState.ENEMYTURN);
 
-        Destroy(gameObject);
+        cardDestroy.DestroyCard(gameObject);
 
-        
+
     }
 
     private void CheckElement()

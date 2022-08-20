@@ -29,9 +29,15 @@ public class BattleSystem : MonoBehaviour
     private TurnNotify turnNotify;
     private FloorCount floorCount;
 
+    private GameObject gameOver;
+    private GameOverManager gameOverManager;
+
+    
+
 
     //count the floor clear
-    int count = 0;
+    int score = 0;
+    int highestScore = 0;
 
     // Singleton
     private void Awake()
@@ -42,11 +48,16 @@ public class BattleSystem : MonoBehaviour
 
         floorCount = GetComponent<FloorCount>();
 
+        gameOver = GameObject.Find("GameOver");
+        gameOverManager = gameOver.GetComponent<GameOverManager>();
+
+        
+
         instance = this;
     }
     private void Start()
     {
-
+        gameOverManager.gameObject.SetActive(false);
         UpdateBattleState(BattleState.START);
     }
     public void UpdateBattleState(BattleState newState)
@@ -69,21 +80,39 @@ public class BattleSystem : MonoBehaviour
                 enemyCtrl.HandleEnemyTurn();
                 break;
             case BattleState.NEXTSTAGE:
-                count++;
-                floorCount.Count(count);
+                score++;
+                floorCount.Count(score);
                 stageGenerate.HandleNextStageGen();
                 break;
             case BattleState.LOSE:
-
+                StartCoroutine( HandleGameOver());
                 break;
             /*case BattleState.DRAWCARD:
                 cardSpawner.Spawn();
                 break;*/
         }
     }
-    public void EndBattle(bool decision)
+    private void UpdateHighestScore()
     {
-        if (decision==true) Debug.Log("Win");
-        if (decision==false) Debug.Log("Lose");
+        if (score > highestScore) highestScore = score;
+    }
+
+    private IEnumerator HandleGameOver()
+    {
+        if (BattleSystem.instance.state == BattleState.LOSE)
+        {
+            UpdateHighestScore();
+
+            yield return new WaitForSeconds(2f);
+
+            gameOver.SetActive(true);
+
+            gameOverManager.GetScore(score, highestScore);
+
+            score=0;
+
+            floorCount.Count(score);
+        }
+
     }
 }

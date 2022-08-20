@@ -20,9 +20,10 @@ public class StageGenerate : MonoBehaviour
     [SerializeField] private PlayerCtrl playerCtrl;
     [SerializeField] private EnemyCtrl enemyCtrl;
 
-    GameObject tempBattleStation;
+    //GameObject tempBattleStation;
 
     GameObject enemyGO;
+    GameObject playerGO;
 
     private void Awake()
     {
@@ -85,9 +86,13 @@ public class StageGenerate : MonoBehaviour
 
     private IEnumerator PlayerSpawn()
     {
+        if (playerGO != null) Destroy(playerGO);
+
         yield return new WaitForSeconds(1f);
-        GameObject playerGO = Instantiate(playerPrefab, playerBattleStation);
+        playerGO = Instantiate(playerPrefab, playerBattleStation);
         playerUnit = playerGO.GetComponent<Unit>();
+
+        playerCtrl.StatGen();
 
         playerHUD.SetHUD(playerCtrl.unit.MaxHp, playerCtrl.unit.CurrentHp);
 
