@@ -81,7 +81,7 @@ public class EnemySkill : MonoBehaviour
 
         int dmg = random.Next(enemyCtrl.unit.Damage-1, enemyCtrl.unit.Damage+2);
 
-        bool hpCheck= playerCtrl.unit.TakeDamage(20);
+        bool hpCheck= playerCtrl.unit.TakeDamage(dmg);
 
         playerHUD.SetHP(playerCtrl.unit.CurrentHp);
 

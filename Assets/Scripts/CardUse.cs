@@ -61,40 +61,54 @@ public class CardUse : MonoBehaviour,IPointerDownHandler
     {
         //card can only be used in player turn
         if (BattleSystem.instance.state != BattleState.PLAYERTURN) return;
-
-        //if(cardInfo.cardName=="Heal")
-
-
-        /*if (cardInfo.cardName == enemyCtrl.unit.Element)
-        {
-            // repel 2 damgage when penalty
-            bool hpCheck = playerCtrl.unit.TakeDamage(2);
-            playerHUD.SetHP(playerCtrl.unit.CurrentHp);
-
-            Debug.Log("Player take 2 damage because of penalty");
-
+        
+        // right click to discard, sacrifice 1 hp
+        if (Input.GetMouseButtonDown(1)){
+            cardDestroy.DestroyCard(gameObject);
             BattleSystem.instance.UpdateBattleState(BattleState.ENEMYTURN);
 
-            Destroy(gameObject);
-
-            return;
-        }*/
-        if(cardInfo.cardName == "Heal")
-        {
-            PlayerHeal();
-        }
-        else
-        {
-            if(cardInfo.cardName == enemyCtrl.unit.Element) PenaltyCheck();
-            else PlayerAttack();
         }
 
+        // left click to use card
+        if (Input.GetMouseButtonDown(0))
+        {
+            if(cardInfo.cardName == "Heal")
+            {
+                PlayerHeal();
+            }
+            else
+            {
+                if(cardInfo.cardName == enemyCtrl.unit.Element) PenaltyCheck();
+                else PlayerAttack();
+            }
+        }
 
-        
 
-        
+            //if(cardInfo.cardName=="Heal")
 
-        
+
+            /*if (cardInfo.cardName == enemyCtrl.unit.Element)
+            {
+                // repel 2 damgage when penalty
+                bool hpCheck = playerCtrl.unit.TakeDamage(2);
+                playerHUD.SetHP(playerCtrl.unit.CurrentHp);
+
+                Debug.Log("Player take 2 damage because of penalty");
+
+                BattleSystem.instance.UpdateBattleState(BattleState.ENEMYTURN);
+
+                Destroy(gameObject);
+
+                return;
+            }*/
+
+
+
+
+
+
+
+
     }
     
     private void PlayerAttack()
