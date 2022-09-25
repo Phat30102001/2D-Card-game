@@ -16,25 +16,17 @@ public class CardSpawner : MonoBehaviour
         instance = this;
     }
 
-    /*public void HandleSpawnCard()
-    {
-        StartCoroutine(Spawn());
-    }*/
-
     public void HandleSpawnCard()
     {   
         System.Random random = new System.Random();
 
-        int cardPrefab = random.Next(1,6);
+        int cardPrefab = random.Next(1,9);
+        if (cardPrefab != 5 && cardPrefab > 5) cardPrefab -= 5;
 
         card = Resources.Load<GameObject>("Prefabs/Cards/"+cardPrefab);
 
-        //Debug.Log(cardPrefab);
 
-
-        //spawn card
-        
-        
+        //spawn card, object name's card
         gameObjectName = "Card" ;
         newCard=Instantiate(card);
         newCard.name = gameObjectName;

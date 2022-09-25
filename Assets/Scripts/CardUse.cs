@@ -145,7 +145,7 @@ public class CardUse : MonoBehaviour,IPointerDownHandler
         playerCtrl.unit.Healpoint(cardInfo.healPoint);
 
         playerHUD.SetHP(playerCtrl.unit.CurrentHp);
-
+        DotweenAnimateEffect.instance.HealAnimation(playerPrefab);
         cardDestroy.DestroyCard(gameObject);
 
         BattleSystem.instance.UpdateBattleState(BattleState.ENEMYTURN);

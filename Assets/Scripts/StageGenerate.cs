@@ -20,31 +20,18 @@ public class StageGenerate : MonoBehaviour
     [SerializeField] private PlayerCtrl playerCtrl;
     [SerializeField] private EnemyCtrl enemyCtrl;
 
-    //GameObject tempBattleStation;
-
     GameObject enemyGO;
     GameObject playerGO;
 
     private void Awake()
     {
-        //System.Random random = new System.Random();
 
 
         playerPrefab = Resources.Load<GameObject>("Prefabs/Player");
-        /*int enemyNum=random.Next(1,3);
-        string enemyPath="Prefabs/Enemy"+enemyNum;
-        enemyPrefab = Resources.Load<GameObject>(enemyPath);*/
-
-        
 
 
         playerBattleStation = GameObject.Find("PlayerBattleStation").GetComponent<Transform>();
         enemyBattleStation = GameObject.Find("EnemyBattleStation").GetComponent<Transform>();
-
-
-        
-
-        //int choice = random.Next(0, 10);
 
         playerHUD = GameObject.Find("PlayerHealthBar").GetComponent<BattleHUD>();
         enemyHUD = GameObject.Find("EnemyHealthBar").GetComponent<BattleHUD>();
@@ -52,37 +39,7 @@ public class StageGenerate : MonoBehaviour
 
         playerCtrl = GameObject.Find("PlayerCtrl").GetComponent<PlayerCtrl>();
         enemyCtrl = GameObject.Find("EnemyCtrl").GetComponent<EnemyCtrl>();
-
-
     }
-
-    /*public IEnumerator SetUpBattle()
-    {
-        GameObject playerGO = Instantiate(playerPrefab, playerBattleStation);
-        playerUnit = playerGO.GetComponent<Unit>();
-
-        GameObject enemyGO = Instantiate(enemyPrefab, enemyBattleStation);
-        enemyUnit = enemyGO.GetComponent<Unit>();
-
-        Debug.Log("Battle start");
-        Debug.Log("enemy's weakness is " + enemyCtrl.unit.Weakness);
-        Debug.Log("enemy's element is " + enemyCtrl.unit.Element);
-
-
-        playerHUD.SetHUD(playerCtrl.unit.MaxHp,playerCtrl.unit.CurrentHp);
-        enemyHUD.SetHUD(enemyCtrl.unit.MaxHp,enemyCtrl.unit.CurrentHp);
-
-        yield return new WaitForSeconds(2f);
-
-        BattleSystem.instance.UpdateBattleState(BattleState.PLAYERTURN);
-
-        //Start the game with 3 card
-        for(int i = 0; i < 3; i++)
-        {
-            CardSpawner.instance.HandleSpawnCard();
-        }
-        
-    }*/
 
     private IEnumerator PlayerSpawn()
     {
@@ -95,7 +52,7 @@ public class StageGenerate : MonoBehaviour
         playerCtrl.StatGen();
 
         playerHUD.SetHUD(playerCtrl.unit.MaxHp, playerCtrl.unit.CurrentHp);
-
+        
         //Start the game with 3 card
         for (int i = 0; i < 5; i++)
         {
@@ -111,13 +68,20 @@ public class StageGenerate : MonoBehaviour
         int enemyNum = random.Next(1, 5);
         string enemyPath = "Prefabs/Enemy" + enemyNum;
         enemyPrefab = Resources.Load<GameObject>(enemyPath);
-
+        
         enemyCtrl.StateGen();
 
         yield return new WaitForSeconds(1f);
 
-        if (enemyGO != null) Destroy(enemyGO);
+        // destroy previous enemyGO
+        if (enemyGO != null)
+        {
+            DotweenAnimateEffect.instance.HandleDeadObject(enemyGO);
+            yield return new WaitForSeconds(1f);
+            Destroy(enemyGO);
+        }
         enemyGO = Instantiate(enemyPrefab, enemyBattleStation);
+        enemyGO.name = "Enemy";
         enemyUnit = enemyGO.GetComponent<Unit>();
 
         enemyHUD.SetHUD(enemyCtrl.unit.MaxHp, enemyCtrl.unit.CurrentHp);
@@ -125,20 +89,12 @@ public class StageGenerate : MonoBehaviour
         Debug.Log("Battle start");
         Debug.Log("enemy's weakness is " + enemyCtrl.unit.Weakness);
         Debug.Log("enemy's element is " + enemyCtrl.unit.Element);
-
-        
     }
-
-
 
     public void HandleStageGen()
     {
         StartCoroutine(PlayerSpawn());
         StartCoroutine(EnemySpawn());
-
-        
-
-        //BattleSystem.instance.UpdateBattleState(BattleState.PLAYERTURN);
     }
 
     public void HandleNextStageGen()

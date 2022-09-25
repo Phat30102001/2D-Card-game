@@ -33,25 +33,21 @@ public class EnemySkill : MonoBehaviour
 
     public void Action()
     {
-        //Debug.Log("Enemy turn");
 
        
         System.Random random = new System.Random();
 
-        int choice= random.Next(0,2);
+        int choice= random.Next(0,5);
 
-
-
-        //Debug.Log(choice);
         switch (choice)
         {
             case 0:
-                StartCoroutine(NormalAttack());
-                //IsDead();
-                break;
-
-            case 1:
                 StartCoroutine(Heal());
+                break;
+                
+
+            default:
+                StartCoroutine(NormalAttack());
                 break;
         }
         
@@ -111,15 +107,12 @@ public class EnemySkill : MonoBehaviour
         yield return new WaitForSeconds(1f);
         
         enemyCtrl.unit.Healpoint(3);
-
         enemyHUD.SetHP(enemyCtrl.unit.CurrentHp);
-
-        Debug.Log("Enemy use Heal");
+        DotweenAnimateEffect.instance.HealAnimation(enemyPrefab);
+        //Debug.Log("Enemy use Heal");
 
         yield return new WaitForSeconds(1f);
-
         CardSpawner.instance.HandleSpawnCard();
-
         BattleSystem.instance.UpdateBattleState(BattleState.PLAYERTURN);
     }
     

@@ -3,26 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum BattleState { START,PLAYERTURN,ENEMYTURN,DRAWCARD,NEXTSTAGE,LOSE}
-
+public enum BattleState { START,PLAYERTURN,ENEMYTURN,NEXTSTAGE,LOSE}
 
 public class BattleSystem : MonoBehaviour
 {
     public static BattleSystem instance;
 
     public BattleState state;
-
-    /*public GameObject playerPrefab;
-    public GameObject enemyPrefab;
-
-    public Transform playerBattleStation;
-    public Transform enemyBattleStation;
-
-    public BattleHUD playerHUD;
-    public BattleHUD enemyHUD;
-
-    Unit playerUnit;
-    Unit enemyUnit;*/
 
     private StageGenerate stageGenerate;
     private EnemyCtrl enemyCtrl;
@@ -32,14 +19,10 @@ public class BattleSystem : MonoBehaviour
     private GameObject gameOver;
     private GameOverManager gameOverManager;
 
-    
-
-
     //count the floor clear
     int score = 0;
     int highestScore = 0;
 
-    // Singleton
     private void Awake()
     {
         stageGenerate = GameObject.Find("Stage").GetComponent<StageGenerate>();
@@ -51,8 +34,7 @@ public class BattleSystem : MonoBehaviour
         gameOver = GameObject.Find("GameOver");
         gameOverManager = gameOver.GetComponent<GameOverManager>();
 
-        
-
+        //singleton
         instance = this;
     }
     private void Start()
@@ -87,9 +69,6 @@ public class BattleSystem : MonoBehaviour
             case BattleState.LOSE:
                 StartCoroutine( HandleGameOver());
                 break;
-            /*case BattleState.DRAWCARD:
-                cardSpawner.Spawn();
-                break;*/
         }
     }
     private void UpdateHighestScore()

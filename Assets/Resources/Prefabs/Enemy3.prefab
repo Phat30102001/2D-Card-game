@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1699962030624412382}
   - component: {fileID: 7405503351382406586}
   - component: {fileID: 1395948542785192176}
+  - component: {fileID: -3474750966797399972}
   m_Layer: 0
   m_Name: Enemy3
   m_TagString: Untagged
@@ -118,3 +119,15 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!225 &-3474750966797399972
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1312710105550363981}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
