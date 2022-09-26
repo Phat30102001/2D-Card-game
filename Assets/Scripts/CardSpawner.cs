@@ -20,11 +20,11 @@ public class CardSpawner : MonoBehaviour
     {   
         System.Random random = new System.Random();
 
+        // random card, heal card have lower chance to spawn
         int cardPrefab = random.Next(1,9);
         if (cardPrefab != 5 && cardPrefab > 5) cardPrefab -= 5;
 
         card = Resources.Load<GameObject>("Prefabs/Cards/"+cardPrefab);
-
 
         //spawn card, object name's card
         gameObjectName = "Card" ;

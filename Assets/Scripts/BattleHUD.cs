@@ -10,7 +10,6 @@ public class BattleHUD : MonoBehaviour
     public TextMeshProUGUI healthTextBar;
     string healthTextConvert;
 
-
     public void SetHUD(int maxHp,int currentHp)
     {
         healthBar.maxValue = maxHp;

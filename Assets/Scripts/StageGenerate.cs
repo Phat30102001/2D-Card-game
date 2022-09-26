@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class StageGenerate : MonoBehaviour
 {
-
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private GameObject enemyPrefab;
 
@@ -25,8 +24,6 @@ public class StageGenerate : MonoBehaviour
 
     private void Awake()
     {
-
-
         playerPrefab = Resources.Load<GameObject>("Prefabs/Player");
 
 

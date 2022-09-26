@@ -3,8 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-
 public class EnemySkill : MonoBehaviour
 {
 
@@ -33,10 +31,9 @@ public class EnemySkill : MonoBehaviour
 
     public void Action()
     {
-
-       
         System.Random random = new System.Random();
 
+        //random choice, healing have lower chance
         int choice= random.Next(0,5);
 
         switch (choice)
@@ -50,22 +47,7 @@ public class EnemySkill : MonoBehaviour
                 StartCoroutine(NormalAttack());
                 break;
         }
-        
-
     }
-    /*public void IsDead()
-    {
-        if (playerUnit.currentHp<=0)
-        {
-            BattleSystem.instance.UpdateBattleState(BattleState.DECIDE);
-            
-        }
-        else
-        {
-            BattleSystem.instance.UpdateBattleState(BattleState.PLAYERTURN);
-        }
-    }*/
-
 
     private IEnumerator NormalAttack()
     {
@@ -88,20 +70,14 @@ public class EnemySkill : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         if (hpCheck)
-        {
             BattleSystem.instance.UpdateBattleState(BattleState.LOSE);
-            //BattleSystem.instance.EndBattle(false);
-        }
         else
         {
             CardSpawner.instance.HandleSpawnCard();
             BattleSystem.instance.UpdateBattleState(BattleState.PLAYERTURN);
-
-
         }
-            
-
     }
+
     private IEnumerator Heal()
     {
         yield return new WaitForSeconds(1f);
@@ -115,7 +91,4 @@ public class EnemySkill : MonoBehaviour
         CardSpawner.instance.HandleSpawnCard();
         BattleSystem.instance.UpdateBattleState(BattleState.PLAYERTURN);
     }
-    
- 
-
 }

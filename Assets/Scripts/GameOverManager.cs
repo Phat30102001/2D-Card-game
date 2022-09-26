@@ -4,15 +4,6 @@ using UnityEngine;
 using TMPro;
 public class GameOverManager : MonoBehaviour
 {
-    /*private void Awake()
-    {
-        gameObject.SetActive(false);
-    }*/
-    // Start is called before the first frame update
-
-
-    // Update is called once per frame
-
     public TextMeshProUGUI score;
     public TextMeshProUGUI highestScore;
 

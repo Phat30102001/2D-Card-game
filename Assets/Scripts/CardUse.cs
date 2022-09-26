@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-
-
 [RequireComponent(typeof(BoxCollider2D))]
 public class CardUse : MonoBehaviour,IPointerDownHandler
 {
@@ -23,10 +21,6 @@ public class CardUse : MonoBehaviour,IPointerDownHandler
 
     private void Awake()
     {
-        //cardSpawner = GameObject.Find("CardInHand").GetComponent<CardSpawner>();
-
-        //card = Resources.Load<Card>("Prefabs/Cards/Fire");
-
         playerCtrl = GameObject.Find("PlayerCtrl").GetComponent<PlayerCtrl>();
 
         cardInfo = GetComponent<CardInfo>();
@@ -40,21 +34,6 @@ public class CardUse : MonoBehaviour,IPointerDownHandler
         enemyPrefab = GameObject.Find("EnemyPrefab");
 
         cardDestroy = GameObject.Find("CardOnHand").GetComponent<CardDestroy>();
-
-
-
-    }
-
-
-    private void Start()
-    {
-        
-
-        //card = Resources.Load<Card>("Prefabs/Cards/Fire");
-
-        //cardUI = GameObject.Find(cardSpawner.gameObjectName);
-
-        
     }
     
     public void OnPointerDown(PointerEventData eventData)
@@ -63,57 +42,26 @@ public class CardUse : MonoBehaviour,IPointerDownHandler
         if (BattleSystem.instance.state != BattleState.PLAYERTURN) return;
         
         // right click to discard, sacrifice 1 hp
-        if (Input.GetMouseButtonDown(1)){
+        if (Input.GetMouseButtonDown(1))
+        {
             cardDestroy.DestroyCard(gameObject);
             BattleSystem.instance.UpdateBattleState(BattleState.ENEMYTURN);
-
         }
 
         // left click to use card
         if (Input.GetMouseButtonDown(0))
         {
-            if(cardInfo.cardName == "Heal")
-            {
-                PlayerHeal();
-            }
+            if(cardInfo.cardName == "Heal") PlayerHeal();
             else
             {
-                if(cardInfo.cardName == enemyCtrl.unit.Element) PenaltyCheck();
+                if(cardInfo.cardName == enemyCtrl.unit.Element) Penalty();
                 else PlayerAttack();
             }
         }
-
-
-            //if(cardInfo.cardName=="Heal")
-
-
-            /*if (cardInfo.cardName == enemyCtrl.unit.Element)
-            {
-                // repel 2 damgage when penalty
-                bool hpCheck = playerCtrl.unit.TakeDamage(2);
-                playerHUD.SetHP(playerCtrl.unit.CurrentHp);
-
-                Debug.Log("Player take 2 damage because of penalty");
-
-                BattleSystem.instance.UpdateBattleState(BattleState.ENEMYTURN);
-
-                Destroy(gameObject);
-
-                return;
-            }*/
-
-
-
-
-
-
-
-
     }
     
     private void PlayerAttack()
     {
-
         Debug.Log("you choose attack");
 
         bool hpCheck = enemyCtrl.unit.TakeDamage(cardInfo.attackPoint);
@@ -121,25 +69,19 @@ public class CardUse : MonoBehaviour,IPointerDownHandler
         Debug.Log("Player deal " + cardInfo.attackPoint + " " + cardInfo.cardName + " damage");
         enemyHUD.SetHP(enemyCtrl.unit.CurrentHp);
         DotweenAnimateEffect.instance.AttackAnimation(playerPrefab,enemyPrefab,true);
+        // check hp=0
         if (hpCheck)
         {
             BattleSystem.instance.UpdateBattleState(BattleState.NEXTSTAGE);
             //BattleSystem.instance.EndBattle(true);
         }
-        else
-        {
-
-            CheckElement();
-
-        }
+        else CheckElement();
 
         cardDestroy.DestroyCard(gameObject);
-
     }
 
     private void PlayerHeal()
     {
-
         Debug.Log("Player restore " + cardInfo.healPoint + " hp");
 
         playerCtrl.unit.Healpoint(cardInfo.healPoint);
@@ -151,33 +93,27 @@ public class CardUse : MonoBehaviour,IPointerDownHandler
         BattleSystem.instance.UpdateBattleState(BattleState.ENEMYTURN);
     }
 
-    private void PenaltyCheck()
+    private void Penalty()
     {
-        
-        // repel 2 damgage when penalty
-        bool hpCheck = playerCtrl.unit.TakeDamage(4);
+        // repel 3 damgage when penalty
+        bool hpCheck = playerCtrl.unit.TakeDamage(3);
         playerHUD.SetHP(playerCtrl.unit.CurrentHp);
 
+        DotweenAnimateEffect.instance.DamageRecieveAnimation(playerPrefab);
         Debug.Log("Player take 4 damage because of penalty");
 
-        if (hpCheck)
-        {
-            BattleSystem.instance.UpdateBattleState(BattleState.LOSE);
-            //BattleSystem.instance.EndBattle(false);
-        }
+        if (hpCheck) BattleSystem.instance.UpdateBattleState(BattleState.LOSE);
         else BattleSystem.instance.UpdateBattleState(BattleState.ENEMYTURN);
 
         cardDestroy.DestroyCard(gameObject);
-
-
     }
 
     private void CheckElement()
     {
-        if (cardInfo.cardName != enemyCtrl.unit.Weakness) {
-            BattleSystem.instance.UpdateBattleState(BattleState.ENEMYTURN);
-        } 
-        else {
+        if (cardInfo.cardName != enemyCtrl.unit.Weakness)
+            BattleSystem.instance.UpdateBattleState(BattleState.ENEMYTURN); 
+        else 
+        {
             CardSpawner.instance.HandleSpawnCard();
             BattleSystem.instance.UpdateBattleState(BattleState.PLAYERTURN); 
         }

@@ -30,11 +30,6 @@ public class TurnNotify : MonoBehaviour
         if (BattleSystem.instance.state == BattleState.ENEMYTURN)
         {
             turnName.text = "Enemy turn";
-        }
-        
-        
+        }   
     }
-    
-
-
 }

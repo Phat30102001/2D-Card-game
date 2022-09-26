@@ -14,6 +14,4 @@ public class PlayerCtrl : MonoBehaviour
         unit.Element = "none";
 
     }
-   
-
 }

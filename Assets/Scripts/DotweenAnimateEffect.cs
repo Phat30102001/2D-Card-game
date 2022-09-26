@@ -20,19 +20,21 @@ public class DotweenAnimateEffect : MonoBehaviour
             side = 10;
         }
         else side =-10;
-        var duration = 0.5f;
         gameObject1.transform.DOPunchPosition(
             punch: Vector3.right * side,
             duration: 0.5f,
             vibrato:0,
             elasticity:0
             ) ;
-        gameObject2.transform.DOShakePosition(
+        DamageRecieveAnimation(gameObject2);
+    }
+    public void DamageRecieveAnimation(GameObject gameObject)
+    {
+        gameObject.transform.DOShakePosition(
             duration: 0.5f,
             strength: 5f,
             vibrato: 10
-            ).SetDelay(duration*0.5f) ;
-
+            ).SetDelay(0.5f) ;
     }
     public void HandleDeadObject(GameObject gameObject)
     {
