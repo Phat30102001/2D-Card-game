@@ -67,7 +67,7 @@ public class BattleSystem : MonoBehaviour
                 stageGenerate.HandleNextStageGen();
                 break;
             case BattleState.LOSE:
-                StartCoroutine( HandleGameOver());
+                StartCoroutine(HandleGameOver());
                 break;
         }
     }
@@ -91,6 +91,8 @@ public class BattleSystem : MonoBehaviour
             score=0;
 
             floorCount.Count(score);
+
+            FindObjectOfType<AudioManager>().StopSound("GameTheme");
         }
 
     }

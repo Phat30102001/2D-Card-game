@@ -92,6 +92,7 @@ public class StageGenerate : MonoBehaviour
     {
         StartCoroutine(PlayerSpawn());
         StartCoroutine(EnemySpawn());
+        FindObjectOfType<AudioManager>().PlaySound("GameTheme");
     }
 
     public void HandleNextStageGen()

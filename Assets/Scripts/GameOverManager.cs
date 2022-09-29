@@ -23,12 +23,15 @@ public class GameOverManager : MonoBehaviour
         {
             score.SetText("Floor: "+floor.ToString());
             highestScore.SetText("Deepest floor:"+deepestFloor.ToString());
-        }
-            
+        }   
     }
+
     public void onClickEvent()
     {
         if (BattleSystem.instance.state != BattleState.LOSE) return;
+
+        FindObjectOfType<AudioManager>().PlaySound("Select");
+
         gameObject.SetActive(false);
         cardDestroy.DestroyAllCard();
         BattleSystem.instance.UpdateBattleState(BattleState.START);

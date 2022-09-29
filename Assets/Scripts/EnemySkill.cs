@@ -59,18 +59,24 @@ public class EnemySkill : MonoBehaviour
 
         int dmg = random.Next(enemyCtrl.unit.Damage-1, enemyCtrl.unit.Damage+2);
 
+        FindObjectOfType<AudioManager>().PlaySound("EnemyAttack");
+
         bool hpCheck= playerCtrl.unit.TakeDamage(dmg);
 
         playerHUD.SetHP(playerCtrl.unit.CurrentHp);
 
-        Debug.Log("Enemy use Normal attack");
-        Debug.Log("Player take " + dmg+ " damage");
+        //Debug.Log("Enemy use Normal attack");
+        //Debug.Log("Player take " + dmg+ " damage");
 
 
         yield return new WaitForSeconds(1f);
 
         if (hpCheck)
+        {
+            FindObjectOfType<AudioManager>().PlaySound("Death");
             BattleSystem.instance.UpdateBattleState(BattleState.LOSE);
+        }
+            
         else
         {
             CardSpawner.instance.HandleSpawnCard();
@@ -83,6 +89,9 @@ public class EnemySkill : MonoBehaviour
         yield return new WaitForSeconds(1f);
         
         enemyCtrl.unit.Healpoint(3);
+
+        FindObjectOfType<AudioManager>().PlaySound("Heal");
+
         enemyHUD.SetHP(enemyCtrl.unit.CurrentHp);
         DotweenAnimateEffect.instance.HealAnimation(enemyPrefab);
         //Debug.Log("Enemy use Heal");

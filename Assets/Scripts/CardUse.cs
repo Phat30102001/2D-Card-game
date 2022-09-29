@@ -44,6 +44,8 @@ public class CardUse : MonoBehaviour,IPointerDownHandler
         // right click to discard, sacrifice 1 hp
         if (Input.GetMouseButtonDown(1))
         {
+            FindObjectOfType<AudioManager>().PlaySound("Discard");
+
             cardDestroy.DestroyCard(gameObject);
             BattleSystem.instance.UpdateBattleState(BattleState.ENEMYTURN);
         }
@@ -51,7 +53,7 @@ public class CardUse : MonoBehaviour,IPointerDownHandler
         // left click to use card
         if (Input.GetMouseButtonDown(0))
         {
-            if(cardInfo.cardName == "Heal") PlayerHeal();
+            if (cardInfo.cardName == "Heal") PlayerHeal();
             else
             {
                 if(cardInfo.cardName == enemyCtrl.unit.Element) Penalty();
@@ -66,15 +68,19 @@ public class CardUse : MonoBehaviour,IPointerDownHandler
 
         bool hpCheck = enemyCtrl.unit.TakeDamage(cardInfo.attackPoint);
 
+        FindObjectOfType<AudioManager>().PlaySound("PlayerAttack");
+
         Debug.Log("Player deal " + cardInfo.attackPoint + " " + cardInfo.cardName + " damage");
         enemyHUD.SetHP(enemyCtrl.unit.CurrentHp);
         DotweenAnimateEffect.instance.AttackAnimation(playerPrefab,enemyPrefab,true);
         // check hp=0
         if (hpCheck)
         {
+            FindObjectOfType<AudioManager>().PlaySound("Death");
             BattleSystem.instance.UpdateBattleState(BattleState.NEXTSTAGE);
-            //BattleSystem.instance.EndBattle(true);
         }
+            
+
         else CheckElement();
 
         cardDestroy.DestroyCard(gameObject);
@@ -86,8 +92,12 @@ public class CardUse : MonoBehaviour,IPointerDownHandler
 
         playerCtrl.unit.Healpoint(cardInfo.healPoint);
 
+        FindObjectOfType<AudioManager>().PlaySound("Heal");
+
         playerHUD.SetHP(playerCtrl.unit.CurrentHp);
+
         DotweenAnimateEffect.instance.HealAnimation(playerPrefab);
+
         cardDestroy.DestroyCard(gameObject);
 
         BattleSystem.instance.UpdateBattleState(BattleState.ENEMYTURN);
@@ -97,12 +107,19 @@ public class CardUse : MonoBehaviour,IPointerDownHandler
     {
         // repel 3 damgage when penalty
         bool hpCheck = playerCtrl.unit.TakeDamage(3);
+
+        FindObjectOfType<AudioManager>().PlaySound("RepelAttack");
+
         playerHUD.SetHP(playerCtrl.unit.CurrentHp);
 
         DotweenAnimateEffect.instance.DamageRecieveAnimation(playerPrefab);
-        Debug.Log("Player take 4 damage because of penalty");
+        //Debug.Log("Player take 4 damage because of penalty");
 
-        if (hpCheck) BattleSystem.instance.UpdateBattleState(BattleState.LOSE);
+        if (hpCheck) 
+        {
+            FindObjectOfType<AudioManager>().PlaySound("Death");
+            BattleSystem.instance.UpdateBattleState(BattleState.LOSE); 
+        }
         else BattleSystem.instance.UpdateBattleState(BattleState.ENEMYTURN);
 
         cardDestroy.DestroyCard(gameObject);
