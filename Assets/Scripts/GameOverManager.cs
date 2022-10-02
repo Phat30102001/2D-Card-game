@@ -9,6 +9,7 @@ public class GameOverManager : MonoBehaviour
 
     private CardDestroy cardDestroy;
 
+
     private void Awake()
     {
         score = GameObject.Find("Score").GetComponent<TextMeshProUGUI>();
@@ -31,7 +32,6 @@ public class GameOverManager : MonoBehaviour
         if (BattleSystem.instance.state != BattleState.LOSE) return;
 
         FindObjectOfType<AudioManager>().PlaySound("Select");
-
         gameObject.SetActive(false);
         cardDestroy.DestroyAllCard();
         BattleSystem.instance.UpdateBattleState(BattleState.START);

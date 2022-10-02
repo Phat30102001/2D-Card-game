@@ -82,10 +82,6 @@ public class StageGenerate : MonoBehaviour
         enemyUnit = enemyGO.GetComponent<Unit>();
 
         enemyHUD.SetHUD(enemyCtrl.unit.MaxHp, enemyCtrl.unit.CurrentHp);
-
-        Debug.Log("Battle start");
-        Debug.Log("enemy's weakness is " + enemyCtrl.unit.Weakness);
-        Debug.Log("enemy's element is " + enemyCtrl.unit.Element);
     }
 
     public void HandleStageGen()
@@ -93,6 +89,7 @@ public class StageGenerate : MonoBehaviour
         StartCoroutine(PlayerSpawn());
         StartCoroutine(EnemySpawn());
         FindObjectOfType<AudioManager>().PlaySound("GameTheme");
+        FindObjectOfType<MessageNotify>().ShowMessage("What will you do?");
     }
 
     public void HandleNextStageGen()

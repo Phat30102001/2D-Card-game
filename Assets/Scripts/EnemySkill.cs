@@ -5,17 +5,14 @@ using UnityEngine;
 
 public class EnemySkill : MonoBehaviour
 {
-
     private EnemyCtrl enemyCtrl;
     private PlayerCtrl playerCtrl;
-
 
     private BattleHUD enemyHUD;
     private BattleHUD playerHUD;
 
     private GameObject playerPrefab;
     private GameObject enemyPrefab;
-
 
     private void Awake()
     {
@@ -61,13 +58,11 @@ public class EnemySkill : MonoBehaviour
 
         FindObjectOfType<AudioManager>().PlaySound("EnemyAttack");
 
+        FindObjectOfType<MessageNotify>().ShowMessage("Enemy use Normal attack. You take " + dmg + " damage");
+
         bool hpCheck= playerCtrl.unit.TakeDamage(dmg);
 
         playerHUD.SetHP(playerCtrl.unit.CurrentHp);
-
-        //Debug.Log("Enemy use Normal attack");
-        //Debug.Log("Player take " + dmg+ " damage");
-
 
         yield return new WaitForSeconds(1f);
 
@@ -76,7 +71,6 @@ public class EnemySkill : MonoBehaviour
             FindObjectOfType<AudioManager>().PlaySound("Death");
             BattleSystem.instance.UpdateBattleState(BattleState.LOSE);
         }
-            
         else
         {
             CardSpawner.instance.HandleSpawnCard();
@@ -91,10 +85,10 @@ public class EnemySkill : MonoBehaviour
         enemyCtrl.unit.Healpoint(3);
 
         FindObjectOfType<AudioManager>().PlaySound("Heal");
+        FindObjectOfType<MessageNotify>().ShowMessage("Enemy use Heal");
 
         enemyHUD.SetHP(enemyCtrl.unit.CurrentHp);
         DotweenAnimateEffect.instance.HealAnimation(enemyPrefab);
-        //Debug.Log("Enemy use Heal");
 
         yield return new WaitForSeconds(1f);
         CardSpawner.instance.HandleSpawnCard();

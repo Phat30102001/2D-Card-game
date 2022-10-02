@@ -46,6 +46,8 @@ public class CardUse : MonoBehaviour,IPointerDownHandler
         {
             FindObjectOfType<AudioManager>().PlaySound("Discard");
 
+            FindObjectOfType<MessageNotify>().ShowMessage("You discarded a card");
+
             cardDestroy.DestroyCard(gameObject);
             BattleSystem.instance.UpdateBattleState(BattleState.ENEMYTURN);
         }
@@ -64,13 +66,11 @@ public class CardUse : MonoBehaviour,IPointerDownHandler
     
     private void PlayerAttack()
     {
-        Debug.Log("you choose attack");
-
         bool hpCheck = enemyCtrl.unit.TakeDamage(cardInfo.attackPoint);
 
         FindObjectOfType<AudioManager>().PlaySound("PlayerAttack");
 
-        Debug.Log("Player deal " + cardInfo.attackPoint + " " + cardInfo.cardName + " damage");
+        FindObjectOfType<MessageNotify>().ShowMessage("You deal " + cardInfo.attackPoint + " " + cardInfo.cardName + " damage");
         enemyHUD.SetHP(enemyCtrl.unit.CurrentHp);
         DotweenAnimateEffect.instance.AttackAnimation(playerPrefab,enemyPrefab,true);
         // check hp=0
@@ -88,11 +88,11 @@ public class CardUse : MonoBehaviour,IPointerDownHandler
 
     private void PlayerHeal()
     {
-        Debug.Log("Player restore " + cardInfo.healPoint + " hp");
-
         playerCtrl.unit.Healpoint(cardInfo.healPoint);
 
         FindObjectOfType<AudioManager>().PlaySound("Heal");
+
+        FindObjectOfType<MessageNotify>().ShowMessage("You restore "+ cardInfo.healPoint + " hp");
 
         playerHUD.SetHP(playerCtrl.unit.CurrentHp);
 
@@ -110,10 +110,11 @@ public class CardUse : MonoBehaviour,IPointerDownHandler
 
         FindObjectOfType<AudioManager>().PlaySound("RepelAttack");
 
+        FindObjectOfType<MessageNotify>().ShowMessage("You take 4 damage because the spell repeled");
+
         playerHUD.SetHP(playerCtrl.unit.CurrentHp);
 
         DotweenAnimateEffect.instance.DamageRecieveAnimation(playerPrefab);
-        //Debug.Log("Player take 4 damage because of penalty");
 
         if (hpCheck) 
         {
@@ -132,7 +133,9 @@ public class CardUse : MonoBehaviour,IPointerDownHandler
         else 
         {
             CardSpawner.instance.HandleSpawnCard();
+            
             BattleSystem.instance.UpdateBattleState(BattleState.PLAYERTURN); 
+            FindObjectOfType<MessageNotify>().ShowMessage("You gain one more turn");
         }
     }
 

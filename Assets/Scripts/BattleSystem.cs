@@ -44,8 +44,6 @@ public class BattleSystem : MonoBehaviour
     }
     public void UpdateBattleState(BattleState newState)
     {
-        
-        
         state = newState;
 
         switch (state)
@@ -93,6 +91,7 @@ public class BattleSystem : MonoBehaviour
             floorCount.Count(score);
 
             FindObjectOfType<AudioManager>().StopSound("GameTheme");
+            FindObjectOfType<AudioManager>().PlaySound("GameOver");
         }
 
     }
