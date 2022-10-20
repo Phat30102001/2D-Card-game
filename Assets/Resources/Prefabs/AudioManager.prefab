@@ -1,0 +1,126 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4253596887270724979
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4253596887270725261}
+  - component: {fileID: 4253596887270725262}
+  - component: {fileID: 1370931520}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4253596887270725261
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4253596887270724979}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4253596887270725262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4253596887270724979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a455ffd008e42f041b3388f8e0577c01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  backgroundMixerGroup: {fileID: 5830913165977855515, guid: 42dfa1d5b73360349b4154675e06947a, type: 2}
+  soundEffectMixerGroup: {fileID: -8345103978535635280, guid: 42dfa1d5b73360349b4154675e06947a, type: 2}
+  sound:
+  - audioType: 0
+    name: GameTheme
+    audioClip: {fileID: 8300000, guid: 88cd07a32486f4643bc911954c3454c7, type: 3}
+    volume: 1
+    audioSource: {fileID: 0}
+    loop: 1
+  - audioType: 1
+    name: PlayerAttack
+    audioClip: {fileID: 8300000, guid: 38a6373201cb1c94495c2f332bbe5c5e, type: 3}
+    volume: 0.8
+    audioSource: {fileID: 0}
+    loop: 0
+  - audioType: 1
+    name: Heal
+    audioClip: {fileID: 8300000, guid: 8738a7137971b4a4ba19887e4424018b, type: 3}
+    volume: 0.8
+    audioSource: {fileID: 0}
+    loop: 0
+  - audioType: 1
+    name: EnemyAttack
+    audioClip: {fileID: 8300000, guid: ea860fad2dfa01c4598975af77695a3d, type: 3}
+    volume: 0.8
+    audioSource: {fileID: 0}
+    loop: 0
+  - audioType: 1
+    name: RepelAttack
+    audioClip: {fileID: 8300000, guid: 412044a9fec169e4f894aff33bff7df4, type: 3}
+    volume: 0.8
+    audioSource: {fileID: 0}
+    loop: 0
+  - audioType: 1
+    name: Death
+    audioClip: {fileID: 8300000, guid: abce0c51fe71e2646ab39ea5829a2ba8, type: 3}
+    volume: 1
+    audioSource: {fileID: 0}
+    loop: 0
+  - audioType: 1
+    name: Discard
+    audioClip: {fileID: 8300000, guid: 6712564fff6a07646a741e13e96f895f, type: 3}
+    volume: 0.8
+    audioSource: {fileID: 0}
+    loop: 0
+  - audioType: 1
+    name: Select
+    audioClip: {fileID: 8300000, guid: e4365b55a7577a0429d57c8a81c72ef8, type: 3}
+    volume: 1
+    audioSource: {fileID: 0}
+    loop: 0
+  - audioType: 0
+    name: MainMenuTheme
+    audioClip: {fileID: 8300000, guid: 845f269a00cdb6b47a7533870ba56e9a, type: 3}
+    volume: 1
+    audioSource: {fileID: 0}
+    loop: 0
+  - audioType: 1
+    name: GameOver
+    audioClip: {fileID: 8300000, guid: 81b85cfe8dd489748ad03aeb7f35c7a2, type: 3}
+    volume: 1
+    audioSource: {fileID: 0}
+    loop: 0
+--- !u!114 &1370931520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4253596887270724979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 319e1dd45640e364abf573d7e5de6791, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  backgroundSliderText: {fileID: 0}
+  soundEffectSliderText: {fileID: 0}
+  backgroundSlider: {fileID: 0}
+  soundEffectSlider: {fileID: 0}

@@ -71,7 +71,13 @@ public class BattleSystem : MonoBehaviour
     }
     private void UpdateHighestScore()
     {
-        if (score > highestScore) highestScore = score;
+        if (score > PlayerPrefs.GetInt("HighScore"))
+        { 
+            PlayerPrefs.SetInt("HighScore",score);
+            highestScore = PlayerPrefs.GetInt("HighScore");
+        }
+
+        
     }
 
     private IEnumerator HandleGameOver()
@@ -84,7 +90,7 @@ public class BattleSystem : MonoBehaviour
 
             gameOver.SetActive(true);
 
-            gameOverManager.GetScore(score, highestScore);
+            gameOverManager.GetScore(score, PlayerPrefs.GetInt("HighScore"));
 
             score=0;
 

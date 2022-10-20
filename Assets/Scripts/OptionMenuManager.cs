@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class OptionMenuManager : MonoBehaviour
 {
@@ -12,5 +13,10 @@ public class OptionMenuManager : MonoBehaviour
     public void HandleBackButton()
     {
         animator.SetBool("Option", false);
+        FindObjectOfType<AudioManager>().PlaySound("Discard");
+    }
+    public void HandleBackMenuButton()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
 }

@@ -6,6 +6,9 @@ using UnityEngine.Audio;
 [System.Serializable]
 public class Sound
 {
+    public enum AudioType { Background, SoundEffect}
+    public AudioType audioType;
+
     public string name;
     public AudioClip audioClip;
 

@@ -17,7 +17,7 @@ public class MainMenuManager : MonoBehaviour
     }
     private void SelectSound()
     {
-        FindObjectOfType<AudioManager>().PlaySound("OK");
+        FindObjectOfType<AudioManager>().PlaySound("Select");
     }
     public void HandlePlayButton()
     {
@@ -38,6 +38,7 @@ public class MainMenuManager : MonoBehaviour
     
     public void HandleOptionButton()
     {
+        if (animator.GetBool("Option")) return;
         //Debug.Log("Option");
         animator.SetBool("Option", true);
         SelectSound();
