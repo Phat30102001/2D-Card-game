@@ -7,6 +7,7 @@ public class Unit : MonoBehaviour
 {
     //private string[] elemental = {"None","Fire","Ice","Thunder","Wind"};
     private string element;
+    private string subElement;
     private string weakness;
     private int damage;
     private int maxHp;
@@ -56,9 +57,22 @@ public class Unit : MonoBehaviour
         set
         {
             element = value;
+
+        }
+    }
+    public string SubElement
+        {
+        get
+        {
+            return subElement;
+        }
+        set
+        {
+            subElement = value;
             
         }
-    }public string Weakness
+    }
+    public string Weakness
     {
         get
         {

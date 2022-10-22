@@ -42,6 +42,5 @@ public class MainMenuManager : MonoBehaviour
         //Debug.Log("Option");
         animator.SetBool("Option", true);
         SelectSound();
-
     }
 }

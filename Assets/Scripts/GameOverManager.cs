@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 public class GameOverManager : MonoBehaviour
 {
     public TextMeshProUGUI score;
@@ -27,7 +28,7 @@ public class GameOverManager : MonoBehaviour
         }   
     }
 
-    public void onClickEvent()
+    public void HandleRestartButton()
     {
         if (BattleSystem.instance.state != BattleState.LOSE) return;
 
@@ -36,5 +37,9 @@ public class GameOverManager : MonoBehaviour
         cardDestroy.DestroyAllCard();
         BattleSystem.instance.UpdateBattleState(BattleState.START);
     }
-    
+    public void HandleBackMenuButton()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+    }
+
 }

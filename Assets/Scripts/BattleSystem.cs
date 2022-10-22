@@ -20,7 +20,7 @@ public class BattleSystem : MonoBehaviour
     private GameOverManager gameOverManager;
 
     //count the floor clear
-    int score = 0;
+    public int score = 0;
     int highestScore = 0;
 
     private void Awake()
@@ -53,7 +53,7 @@ public class BattleSystem : MonoBehaviour
                 break;
             case BattleState.PLAYERTURN:
                 turnNotify.HandleTurnNotify();
-                Debug.Log("Choose your card");
+                //Debug.Log("Choose your card");
                 break;
             case BattleState.ENEMYTURN:
                 turnNotify.HandleTurnNotify();
@@ -61,6 +61,7 @@ public class BattleSystem : MonoBehaviour
                 break;
             case BattleState.NEXTSTAGE:
                 score++;
+                LevelIncrease.instance.LevelCase(score);
                 floorCount.Count(score);
                 stageGenerate.HandleNextStageGen();
                 break;
