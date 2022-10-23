@@ -143,7 +143,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Unknow effect
+  m_text: Description
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 629bdd886e9134949ad54647e3e9b734, type: 2}
   m_sharedMaterial: {fileID: 9076684696263438175, guid: 629bdd886e9134949ad54647e3e9b734, type: 2}
@@ -178,7 +178,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 32
-  m_VerticalAlignment: 512
+  m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 9
   m_wordSpacing: 0
@@ -278,7 +278,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d27d5adff9e576e4d99d45766d4a273d, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -431,7 +431,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Unknow
+  m_text: 'Name
 
 '
   m_isRightToLeft: 0
@@ -518,7 +518,7 @@ GameObject:
   - component: {fileID: 5612842839385125160}
   - component: {fileID: 5612842839385125167}
   m_Layer: 5
-  m_Name: 6
+  m_Name: sample
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -597,8 +597,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65590b71aacf79a488221322975ce120, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardName: Unknow
-  cardImage: {fileID: 21300000, guid: d27d5adff9e576e4d99d45766d4a273d, type: 3}
+  cardName: Blank
+  cardImage: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   attackPoint: 0
   healPoint: 0
 --- !u!61 &5612842839385125166

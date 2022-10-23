@@ -108,6 +108,12 @@ MonoBehaviour:
     volume: 1
     audioSource: {fileID: 0}
     loop: 0
+  - audioType: 1
+    name: Blind
+    audioClip: {fileID: 8300000, guid: 067a24dad201da340b0aadeb29e93da3, type: 3}
+    volume: 1
+    audioSource: {fileID: 0}
+    loop: 0
 --- !u!114 &1370931520
 MonoBehaviour:
   m_ObjectHideFlags: 0

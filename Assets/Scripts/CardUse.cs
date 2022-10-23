@@ -58,7 +58,7 @@ public class CardUse : MonoBehaviour,IPointerDownHandler
             if (cardInfo.cardName == "Heal") PlayerHeal();
             else
             {
-                if(cardInfo.cardName == enemyCtrl.unit.Element) Penalty();
+                if(cardInfo.cardName == enemyCtrl.unit.Element|| cardInfo.cardName == enemyCtrl.unit.SubElement) Penalty();
                 else PlayerAttack();
             }
         }
@@ -79,8 +79,6 @@ public class CardUse : MonoBehaviour,IPointerDownHandler
             FindObjectOfType<AudioManager>().PlaySound("Death");
             BattleSystem.instance.UpdateBattleState(BattleState.NEXTSTAGE);
         }
-            
-
         else CheckElement();
 
         cardDestroy.DestroyCard(gameObject);
@@ -96,7 +94,7 @@ public class CardUse : MonoBehaviour,IPointerDownHandler
 
         playerHUD.SetHP(playerCtrl.unit.CurrentHp);
 
-        DotweenAnimateEffect.instance.HealAnimation(playerPrefab);
+        DotweenAnimateEffect.instance.SpecialSkillAnimation(playerPrefab);
 
         cardDestroy.DestroyCard(gameObject);
 
@@ -132,7 +130,7 @@ public class CardUse : MonoBehaviour,IPointerDownHandler
             BattleSystem.instance.UpdateBattleState(BattleState.ENEMYTURN); 
         else 
         {
-            CardSpawner.instance.HandleSpawnCard();
+            CardSpawner.instance.HandleSpawnCard(1);
             
             BattleSystem.instance.UpdateBattleState(BattleState.PLAYERTURN); 
             FindObjectOfType<MessageNotify>().ShowMessage("You gain one more turn");

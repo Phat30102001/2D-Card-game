@@ -13,18 +13,29 @@ public class CardInfo : MonoBehaviour
     {
         // check card type
         System.Random random = new System.Random();
-        if (cardName != "Heal")
+        switch (cardName)
         {
-            attackPoint = random.Next(2,6);
+            case "Heal":
+                healPoint = random.Next(5, 8);
+                break;
+            //case "Unknow":
+            //    UnknowCardGen();
+            //    break;
+            default:
+                attackPoint = random.Next(2, 6);
+                break;
         }
-        else if (cardName == "Heal")
-        {
-            healPoint = random.Next(5, 8);
-        }
+        //if (cardName != "Heal")
+        //{
+        //    attackPoint = random.Next(2,6);
+        //}
+        //else if (cardName == "Heal")
+        //{
+        //    healPoint = random.Next(5, 8);
+        //}
     }
     public int GetAttackPoint()
     {
-        //Debug.Log(attackPoint);
         return attackPoint;      
     }
 
@@ -32,7 +43,15 @@ public class CardInfo : MonoBehaviour
     {
         return healPoint;
     }
+    //private void UnknowCardGen()
+    //{
+    //    string[] element = { "Fire", "Ice", "Thunder", "Wind" };
+    //    System.Random random = new System.Random();
+    //    int i = random.Next(0,4);
+    //    cardName = element[i];
+    //    attackPoint = random.Next(2, 6);
 
+    //}
 
 
 

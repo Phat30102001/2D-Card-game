@@ -11,7 +11,7 @@ public class EnemyCtrl : MonoBehaviour
 
     public void HandleEnemyTurn()
     { 
-        enemySkill.Action();      
+        enemySkill.Choice();      
     }
 
     public void StateGen()
@@ -45,7 +45,7 @@ public class EnemyCtrl : MonoBehaviour
     public void SubElementGen()
     {
         //Debug.Log(BattleSystem.instance.score);
-        if (LevelIncrease.instance.LevelCheck(1)==false)
+        if (LevelIncrease.instance.LevelCheck(0)==false)
         {
             unit.SubElement = element[4];
             return;

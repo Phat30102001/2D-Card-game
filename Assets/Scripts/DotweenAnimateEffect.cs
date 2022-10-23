@@ -41,7 +41,7 @@ public class DotweenAnimateEffect : MonoBehaviour
         gameObject.transform.DOMoveY(-20f, 1f, true);
     }
 
-    public void HealAnimation(GameObject gameObject)
+    public void SpecialSkillAnimation(GameObject gameObject)
     {
         gameObject.transform.DOPunchScale(
             punch: Vector3.one* 10f,

@@ -33,15 +33,21 @@ public class CardDisplay : MonoBehaviour
     private void Start()
     {
         cardInfo = GetComponent<CardInfo>();
-
+        if (cardInfo.cardName == "Unknow") {
+            string[] element = { "Fire", "Ice", "Thunder", "Wind" };
+            System.Random random = new System.Random();
+            int i = random.Next(0, 4);
+            cardInfo.cardName = element[i];
+            return; 
+        }
         cardName.text = cardInfo.cardName;
 
         // check card type
         if (cardInfo.cardName != "Heal")
             cardDescripttion.text = "Deal " + cardInfo.GetAttackPoint() + " " + cardInfo.cardName + " damage";
         else if (cardInfo.cardName == "Heal")
-            cardDescripttion.text = "Restore " + cardInfo.healPoint + " health point";
-
+            cardDescripttion.text = "Restore " + cardInfo.GetHealPoint() + " health point";
+        //else if (cardInfo.cardName == "Unknow") return;
         cardImage.sprite = cardInfo.cardImage;
     }
 }

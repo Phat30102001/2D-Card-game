@@ -26,45 +26,63 @@ public class EnemySkill : MonoBehaviour
         enemyPrefab = GameObject.Find("EnemyPrefab");
     }
 
-    public void Action()
+    public void Choice()
     {
         System.Random random = new System.Random();
 
         //random choice, healing have lower chance
-        int choice= random.Next(0,5);
 
+        int choice= random.Next(0,5);
+        //int choice= 1;
+        StartCoroutine(Action(choice));
+        //switch (choice)
+        //{
+        //    case 0:
+        //        StartCoroutine(Heal());
+        //        break;
+                
+
+        //    default:
+        //        StartCoroutine(NormalAttack());
+        //        break;
+        //}
+    }
+
+    private IEnumerator Action(int choice)
+    {
+        yield return new WaitForSeconds(0.5f);
         switch (choice)
         {
             case 0:
-                StartCoroutine(Heal());
+                Heal();
                 break;
-                
-
+            case 1:
+                Debug.Log("unknow");
+                ThrowUnknowCard();
+                break;
             default:
-                StartCoroutine(NormalAttack());
+                NormalAttack();
                 break;
         }
+
+        yield return new WaitForSeconds(1f);
     }
 
-    private IEnumerator NormalAttack()
+    private void NormalAttack()
     {
-        yield return new WaitForSeconds(1f);
-
-        DotweenAnimateEffect.instance.AttackAnimation(enemyPrefab, playerPrefab,false);
-
+        //yield return new WaitForSeconds(1f);
         System.Random random = new System.Random();
 
-        int dmg = random.Next(enemyCtrl.unit.Damage-1, enemyCtrl.unit.Damage+2);
-
-        FindObjectOfType<AudioManager>().PlaySound("EnemyAttack");
-
-        FindObjectOfType<MessageNotify>().ShowMessage("Enemy use Normal attack. You take " + dmg + " damage");
+        int dmg = random.Next(enemyCtrl.unit.Damage-1, enemyCtrl.unit.Damage+2);        
 
         bool hpCheck= playerCtrl.unit.TakeDamage(dmg);
 
         playerHUD.SetHP(playerCtrl.unit.CurrentHp);
 
-        yield return new WaitForSeconds(1f);
+        DotweenAnimateEffect.instance.AttackAnimation(enemyPrefab, playerPrefab,false);
+        FindObjectOfType<AudioManager>().PlaySound("EnemyAttack");
+        FindObjectOfType<MessageNotify>().ShowMessage("Enemy use Normal attack. You take " + dmg + " damage");
+        //yield return new WaitForSeconds(1f);
 
         if (hpCheck)
         {
@@ -73,25 +91,39 @@ public class EnemySkill : MonoBehaviour
         }
         else
         {
-            CardSpawner.instance.HandleSpawnCard();
+            CardSpawner.instance.HandleSpawnCard(1);
             BattleSystem.instance.UpdateBattleState(BattleState.PLAYERTURN);
         }
     }
 
-    private IEnumerator Heal()
+    private void Heal()
     {
-        yield return new WaitForSeconds(1f);
-        
+        //yield return new WaitForSeconds(1f);
         enemyCtrl.unit.Healpoint(3);
 
+        enemyHUD.SetHP(enemyCtrl.unit.CurrentHp);
+
+        DotweenAnimateEffect.instance.SpecialSkillAnimation(enemyPrefab);
         FindObjectOfType<AudioManager>().PlaySound("Heal");
         FindObjectOfType<MessageNotify>().ShowMessage("Enemy use Heal");
 
-        enemyHUD.SetHP(enemyCtrl.unit.CurrentHp);
-        DotweenAnimateEffect.instance.HealAnimation(enemyPrefab);
+        //yield return new WaitForSeconds(1f);
+        CardSpawner.instance.HandleSpawnCard(1);
+        BattleSystem.instance.UpdateBattleState(BattleState.PLAYERTURN);
+    }
 
-        yield return new WaitForSeconds(1f);
-        CardSpawner.instance.HandleSpawnCard();
+    private void ThrowUnknowCard()
+    {
+        if (LevelIncrease.instance.LevelCheck(1) == false)
+        {
+            Choice();
+            return;
+        }
+        DotweenAnimateEffect.instance.SpecialSkillAnimation(enemyPrefab);
+        FindObjectOfType<AudioManager>().PlaySound("Blind");
+        FindObjectOfType<MessageNotify>().ShowMessage("Enemy use Blind, your next card will have unknow effect");
+
+        CardSpawner.instance.HandleSpawnCard(2);
         BattleSystem.instance.UpdateBattleState(BattleState.PLAYERTURN);
     }
 }

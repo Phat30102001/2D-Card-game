@@ -53,7 +53,7 @@ public class StageGenerate : MonoBehaviour
         //Start the game with 3 card
         for (int i = 0; i < 5; i++)
         {
-            CardSpawner.instance.HandleSpawnCard();
+            CardSpawner.instance.HandleSpawnCard(1);
         }
 
         BattleSystem.instance.UpdateBattleState(BattleState.PLAYERTURN);
@@ -62,7 +62,7 @@ public class StageGenerate : MonoBehaviour
     private IEnumerator EnemySpawn()
     {
         System.Random random = new System.Random();
-        int enemyNum = random.Next(1, 5);
+        int enemyNum = random.Next(0, 4)+1;
         string enemyPath = "Prefabs/Enemy" + enemyNum;
         enemyPrefab = Resources.Load<GameObject>(enemyPath);
         
@@ -95,7 +95,7 @@ public class StageGenerate : MonoBehaviour
     public void HandleNextStageGen()
     {
         StartCoroutine(EnemySpawn());
-        CardSpawner.instance.HandleSpawnCard();
+        CardSpawner.instance.HandleSpawnCard(1);
         BattleSystem.instance.UpdateBattleState(BattleState.PLAYERTURN);
     }
 

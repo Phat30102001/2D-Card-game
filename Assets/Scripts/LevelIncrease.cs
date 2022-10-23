@@ -12,7 +12,7 @@ public class LevelIncrease : MonoBehaviour
         level = new Dictionary<int, bool>();
         instance = this;
 
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 2; i++)
         {
             level.Add(i, false);
         }
@@ -26,10 +26,15 @@ public class LevelIncrease : MonoBehaviour
     {
         switch (score)
         {
-            case 1:
-                level[1] = true;
-                Debug.Log("Normal");
+            case 6:
+                level[0] = true;
+                FindObjectOfType<MessageNotify>().ShowMessage("Enemys can repel 2 element now");
                 break;
+            case 15:
+                level[1] = true;
+                FindObjectOfType<MessageNotify>().ShowMessage("Enemys can throw unknow effect card now");
+                break;
+
             default:
                 break;
         }
